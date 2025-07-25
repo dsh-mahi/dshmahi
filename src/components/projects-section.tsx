@@ -7,42 +7,7 @@ import type { Project } from '../app/page';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-import NextIcon from '@/assets/logos/next.svg';
-import TypescriptIcon from '@/assets/logos/typescript.svg';
-import TailwindIcon from '@/assets/logos/tailwind.svg';
-import StripeIcon from '@/assets/logos/stripe.svg';
-import SanityIcon from '@/assets/logos/sanity.svg';
-import FramerIcon from '@/assets/logos/framer.svg';
-import SvelteIcon from '@/assets/logos/svelte.svg';
-import VercelIcon from '@/assets/logos/vercel.svg';
-import ReactIcon from '@/assets/logos/react.svg';
-import MongoIcon from '@/assets/logos/mongo.svg';
-import NodeIcon from '@/assets/logos/node.svg';
-import VueIcon from '@/assets/logos/vue.svg';
-import ChartjsIcon from '@/assets/logos/chartjs.svg';
-import OpenWeatherMapIcon from '@/assets/logos/openweathermap.svg';
-
-const techIconMap: { [key: string]: React.ComponentType<React.SVGProps<SVGSVGElement>> } = {
-  'Next.js': NextIcon,
-  'TypeScript': TypescriptIcon,
-  'Tailwind CSS': TailwindIcon,
-  'Stripe': StripeIcon,
-  'Sanity': SanityIcon,
-  'Framer Motion': FramerIcon,
-  'SvelteKit': SvelteIcon,
-  'Vercel': VercelIcon,
-  'React': ReactIcon,
-  'Redux': ReactIcon,
-  'MongoDB': MongoIcon,
-  'Node.js': NodeIcon,
-  'Vue.js': VueIcon,
-  'Chart.js': ChartjsIcon,
-  'OpenWeatherMap API': OpenWeatherMapIcon,
-};
-
-
 const ProjectCard = ({ project, index }: { project: Project, index: number }) => {
-
   return (
     <Card key={project.id} className="flex flex-col overflow-hidden transform transition-transform duration-300 ease-in-out shadow-lg hover:shadow-primary/10 border-accent animate-fade-in bg-card/70 backdrop-blur-sm" style={{ animationDelay: `${index * 100}ms`}}>
       <CardContent className="flex-grow p-6 pt-6">
@@ -52,7 +17,7 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
           ))}
         </div>
         <div className="flex items-center gap-3 mb-4">
-          <div className="h-8 w-8 rounded-full bg-muted" />
+           <div className="h-8 w-8 bg-muted rounded-full" />
           <div>
             <CardTitle className="text-xl">{project.title}</CardTitle>
             <a href={`https://${project.siteUrl}`} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:underline">
@@ -62,10 +27,9 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
         </div>
         <CardDescription className="mb-4">{project.description}</CardDescription>
         <div className="flex flex-wrap gap-3">
-          {project.techStack.map(tech => {
-            const Icon = techIconMap[tech];
-            return Icon ? <Icon key={tech} className="h-6 w-6" title={tech}/> : null;
-          })}
+          {project.techStack.map(tech => (
+             <Badge key={tech} variant="outline" className="capitalize">{tech}</Badge>
+          ))}
         </div>
       </CardContent>
     </Card>
@@ -111,6 +75,11 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
                 <ProjectCard key={project.id} project={project} index={index} />
               ))}
             </div>
+            {personalProjects.length === 0 && (
+              <div className="text-center col-span-full py-12">
+                <p className="text-muted-foreground">No personal projects to show yet.</p>
+              </div>
+            )}
           </TabsContent>
         </Tabs>
       </div>
