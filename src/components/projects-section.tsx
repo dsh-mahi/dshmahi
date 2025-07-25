@@ -15,7 +15,7 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
     <Card 
       ref={cardRef}
       key={project.id} 
-      className="group flex flex-col overflow-hidden transform transition-transform duration-300 ease-in-out shadow-lg hover:shadow-primary/10 animate-fade-in bg-card/50 backdrop-blur-lg rounded-2xl relative border border-white/10" 
+      className="group flex flex-col overflow-hidden transform transition-transform duration-300 ease-in-out shadow-lg hover:shadow-primary/10 animate-fade-in bg-card/30 backdrop-blur-lg rounded-2xl relative border border-white/10" 
       style={{ animationDelay: `${index * 100}ms`}}
     >
        <div 
@@ -94,6 +94,11 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
                 <ProjectCard key={project.id} project={project} index={index} />
               ))}
             </div>
+             {clientProjects.length === 0 && (
+              <div className="text-center col-span-full py-12">
+                <p className="text-muted-foreground">No client projects to show yet.</p>
+              </div>
+            )}
           </TabsContent>
         </Tabs>
       </div>
