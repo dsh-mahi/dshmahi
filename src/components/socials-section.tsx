@@ -8,26 +8,26 @@ const socialLinks = [
     name: 'WhatsApp',
     handle: 'For a quick chat',
     href: '#',
-    icon: <WhatsAppIcon className="h-6 w-6 text-muted-foreground" />,
+    icon: <WhatsAppIcon className="h-5 w-5 text-muted-foreground" />,
     preferred: true
   },
   {
     name: 'Instagram',
     handle: 'The highlight reel',
     href: '#',
-    icon: <Instagram className="h-6 w-6 text-muted-foreground" />
+    icon: <Instagram className="h-5 w-5 text-muted-foreground" />
   },
   {
     name: 'LinkedIn',
     handle: 'The professional side',
     href: '#',
-    icon: <Linkedin className="h-6 w-6 text-muted-foreground" />
+    icon: <Linkedin className="h-5 w-5 text-muted-foreground" />
   },
   {
     name: 'GitHub',
     handle: 'Where the code lives',
     href: '#',
-    icon: <Github className="h-6 w-6 text-muted-foreground" />
+    icon: <Github className="h-5 w-5 text-muted-foreground" />
   }
 ];
 
@@ -39,14 +39,14 @@ export default function SocialsSection() {
           <p className="text-sm font-bold uppercase text-muted-foreground mb-2">Connect</p>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Let's Create Together</h2>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            My digital door is always open. Whether you have a question, a project, or just want to geek out about code, I'm here for it.
+            Got a project, a question, or a coffee invitation? My inbox is ready. Let's make something amazing.
           </p>
         </div>
         <hr className="border-accent mb-12" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {socialLinks.map((link, index) => (
-            <a href={link.href} key={index} target="_blank" rel="noopener noreferrer" className="pointer-events-none">
-              <Card className="bg-background/50 backdrop-blur-sm border border-accent hover:border-accent transition-all duration-300 h-48 flex flex-col items-center justify-center text-center p-6 rounded-2xl shadow-lg hover:shadow-primary/10">
+            <a href={link.href} key={index} target="_blank" rel="noopener noreferrer">
+              <Card className="bg-background/50 backdrop-blur-sm border border-accent hover:border-muted-foreground/50 transition-all duration-300 h-48 flex flex-col items-center justify-center text-center p-6 rounded-2xl shadow-lg hover:shadow-primary/10">
                 <CardContent className="flex flex-col items-center justify-center gap-2 p-0">
                   <div className={`h-12 w-12 rounded-full flex items-center justify-center mb-2 border ${link.preferred ? 'border-green-500' : 'border-muted-foreground'}`}>
                     {link.icon}
