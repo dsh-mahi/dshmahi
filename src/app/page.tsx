@@ -7,7 +7,6 @@ import HeroSection from '@/components/hero-section';
 import ProjectsSection from '@/components/projects-section';
 import SocialsSection from '@/components/socials-section';
 import Nav from '@/components/nav';
-import AboutSection from '@/components/about-section';
 
 export interface Project {
   id: number;
@@ -61,7 +60,6 @@ export default function Home() {
     <main className="relative">
       <Nav />
       <HeroSection onPersonalize={handlePersonalizeProjects} isPersonalizing={isPersonalizing} />
-      <AboutSection />
       <ProjectsSection projects={projects} />
       <SocialsSection />
     </main>
