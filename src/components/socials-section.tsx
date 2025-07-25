@@ -4,7 +4,7 @@ import { Github, Linkedin, Twitter } from 'lucide-react';
 
 export default function SocialsSection() {
   return (
-    <section id="socials" className="h-screen w-full flex flex-col justify-center items-center text-center bg-black">
+    <section id="socials" className="min-h-screen w-full flex flex-col justify-center items-center text-center bg-transparent">
       <div className="p-4">
         <h2 className="text-4xl md:text-5xl font-bold mb-4">Let's Connect</h2>
         <p className="text-lg text-muted-foreground mb-8">Find me on social media or drop me a line.</p>

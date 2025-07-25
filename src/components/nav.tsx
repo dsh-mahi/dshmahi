@@ -9,6 +9,9 @@ export default function Nav() {
           <a href="#hero">Home</a>
         </Button>
         <Button variant="ghost" asChild className="rounded-full px-4 py-1 h-auto text-sm">
+          <a href="#about">About</a>
+        </Button>
+        <Button variant="ghost" asChild className="rounded-full px-4 py-1 h-auto text-sm">
           <a href="#projects">Projects</a>
         </Button>
         <Button variant="ghost" asChild className="rounded-full px-4 py-1 h-auto text-sm">

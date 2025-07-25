@@ -2,25 +2,25 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
 import type { Project } from '../app/page';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import NextIcon from 'public/logos/next.svg';
-import TypescriptIcon from 'public/logos/typescript.svg';
-import TailwindIcon from 'public/logos/tailwind.svg';
-import StripeIcon from 'public/logos/stripe.svg';
-import SanityIcon from 'public/logos/sanity.svg';
-import FramerIcon from 'public/logos/framer.svg';
-import SvelteIcon from 'public/logos/svelte.svg';
-import VercelIcon from 'public/logos/vercel.svg';
-import ReactIcon from 'public/logos/react.svg';
-import MongoIcon from 'public/logos/mongo.svg';
-import NodeIcon from 'public/logos/node.svg';
-import VueIcon from 'public/logos/vue.svg';
-import ChartjsIcon from 'public/logos/chartjs.svg';
-import OpenWeatherMapIcon from 'public/logos/openweathermap.svg';
-import DefaultLogo from 'public/logos/default.svg';
+import NextIcon from '@/assets/logos/next.svg';
+import TypescriptIcon from '@/assets/logos/typescript.svg';
+import TailwindIcon from '@/assets/logos/tailwind.svg';
+import StripeIcon from '@/assets/logos/stripe.svg';
+import SanityIcon from '@/assets/logos/sanity.svg';
+import FramerIcon from '@/assets/logos/framer.svg';
+import SvelteIcon from '@/assets/logos/svelte.svg';
+import VercelIcon from '@/assets/logos/vercel.svg';
+import ReactIcon from '@/assets/logos/react.svg';
+import MongoIcon from '@/assets/logos/mongo.svg';
+import NodeIcon from '@/assets/logos/node.svg';
+import VueIcon from '@/assets/logos/vue.svg';
+import ChartjsIcon from '@/assets/logos/chartjs.svg';
+import OpenWeatherMapIcon from '@/assets/logos/openweathermap.svg';
+import DefaultLogo from '@/assets/logos/default.svg';
 
 const techIconMap: { [key: string]: React.ComponentType<React.SVGProps<SVGSVGElement>> } = {
   'Next.js': NextIcon,
@@ -32,7 +32,7 @@ const techIconMap: { [key: string]: React.ComponentType<React.SVGProps<SVGSVGEle
   'SvelteKit': SvelteIcon,
   'Vercel': VercelIcon,
   'React': ReactIcon,
-  'Redux': ReactIcon, // No specific Redux icon, using React
+  'Redux': ReactIcon, 
   'MongoDB': MongoIcon,
   'Node.js': NodeIcon,
   'Vue.js': VueIcon,
@@ -42,8 +42,8 @@ const techIconMap: { [key: string]: React.ComponentType<React.SVGProps<SVGSVGEle
 
 
 const ProjectCard = ({ project, index }: { project: Project, index: number }) => {
-  const Logo = project.logoUrl ? (
-    <img src={project.logoUrl} alt={`${project.title} logo`} className="h-8 w-8 rounded-full" />
+  const Logo = project.logo ? (
+    <project.logo className="h-8 w-8 rounded-full" />
   ) : (
     <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center">
        <DefaultLogo className="h-5 w-5 text-muted-foreground" />
@@ -62,7 +62,7 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
           {Logo}
           <div>
             <CardTitle className="text-xl">{project.title}</CardTitle>
-            <a href={`http://${project.siteUrl}`} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:underline">
+            <a href={`https://${project.siteUrl}`} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:underline">
               {project.siteUrl}
             </a>
           </div>
