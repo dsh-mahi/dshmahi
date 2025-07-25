@@ -19,7 +19,7 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
       style={{ animationDelay: `${index * 100}ms`}}
     >
        <div 
-        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="pointer-events-none absolute -inset-px rounded-2xl"
         style={spotlightStyle}
       />
       <CardContent className="flex-grow p-6 pt-6">
