@@ -9,7 +9,7 @@ import { useRef } from 'react';
 const socialLinks = [
   {
     name: 'WhatsApp',
-    handle: 'Let\'s have a chat!',
+    handle: 'For a quick chat',
     href: '#',
     icon: Phone,
     color: 'text-[#25D366]',
@@ -17,7 +17,7 @@ const socialLinks = [
   },
   {
     name: 'Instagram',
-    handle: 'My creative side',
+    handle: 'The highlight reel',
     href: '#',
     icon: Instagram,
     color: 'group-hover:text-[#E4405F]',
@@ -25,7 +25,7 @@ const socialLinks = [
   },
   {
     name: 'LinkedIn',
-    handle: 'My professional network',
+    handle: 'The professional side',
     href: '#',
     icon: Linkedin,
     color: 'group-hover:text-[#0A66C2]',
@@ -33,7 +33,7 @@ const socialLinks = [
   },
   {
     name: 'GitHub',
-    handle: 'My code repository',
+    handle: 'Where the code lives',
     href: '#',
     icon: Github,
     color: 'group-hover:text-white',
