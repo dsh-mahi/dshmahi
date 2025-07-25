@@ -19,31 +19,33 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
       style={{ animationDelay: `${index * 100}ms`}}
     >
        <div 
-        className="pointer-events-none absolute -inset-px rounded-2xl"
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={spotlightStyle}
       />
-      <CardContent className="flex-grow p-6 pt-6">
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.tags.map(tag => (
-            <Badge key={tag} variant={tag === 'Work In Progress' ? 'destructive' : 'secondary'} className="capitalize">{tag}</Badge>
-          ))}
-        </div>
-        <div className="flex items-center gap-3 mb-4">
-           <div className="h-8 w-8 bg-muted rounded-full" />
-          <div>
-            <CardTitle className="text-xl">{project.title}</CardTitle>
-            <a href={`https://${project.siteUrl}`} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:underline">
-              {project.siteUrl}
-            </a>
+      <div className="relative z-10">
+        <CardContent className="flex-grow p-6 pt-6">
+          <div className="flex flex-wrap gap-2 mb-4">
+            {project.tags.map(tag => (
+              <Badge key={tag} variant={tag === 'Work In Progress' ? 'destructive' : 'secondary'} className="capitalize">{tag}</Badge>
+            ))}
           </div>
-        </div>
-        <CardDescription className="mb-4">{project.description}</CardDescription>
-        <div className="flex flex-wrap gap-3">
-          {project.techStack.map(tech => (
-             <Badge key={tech} variant="outline" className="capitalize">{tech}</Badge>
-          ))}
-        </div>
-      </CardContent>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-8 w-8 bg-muted rounded-full" />
+            <div>
+              <CardTitle className="text-xl">{project.title}</CardTitle>
+              <a href={`https://${project.siteUrl}`} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:underline">
+                {project.siteUrl}
+              </a>
+            </div>
+          </div>
+          <CardDescription className="mb-4">{project.description}</CardDescription>
+          <div className="flex flex-wrap gap-3">
+            {project.techStack.map(tech => (
+              <Badge key={tech} variant="outline" className="capitalize">{tech}</Badge>
+            ))}
+          </div>
+        </CardContent>
+      </div>
     </Card>
   );
 };
