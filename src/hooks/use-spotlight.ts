@@ -32,7 +32,7 @@ export function useSpotlight(ref: React.RefObject<HTMLElement>) {
   }, [ref]);
 
   const spotlightStyle: React.CSSProperties = {
-     background: `radial-gradient(circle at ${position.x}px ${position.y}px, hsl(0 0% 50% / 0.1), transparent 40%)`,
+     background: `radial-gradient(circle at ${position.x}px ${position.y}px, hsl(0 0% 20%), hsl(0 0% 5%) 40%)`,
   }
 
   return { spotlightStyle };
