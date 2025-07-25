@@ -42,7 +42,6 @@ const techIconMap: { [key: string]: React.ComponentType<React.SVGProps<SVGSVGEle
 
 
 const ProjectCard = ({ project, index }: { project: Project, index: number }) => {
-  const LogoComponent = project.logo;
 
   return (
     <Card key={project.id} className="flex flex-col overflow-hidden transform transition-transform duration-300 ease-in-out shadow-lg hover:shadow-primary/10 border-accent animate-fade-in bg-card/70 backdrop-blur-sm" style={{ animationDelay: `${index * 100}ms`}}>
@@ -53,7 +52,7 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
           ))}
         </div>
         <div className="flex items-center gap-3 mb-4">
-          <LogoComponent className="h-8 w-8 rounded-full" />
+          <div className="h-8 w-8 rounded-full bg-muted" />
           <div>
             <CardTitle className="text-xl">{project.title}</CardTitle>
             <a href={`https://${project.siteUrl}`} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:underline">
