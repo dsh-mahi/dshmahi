@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -9,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const ProjectCard = ({ project, index }: { project: Project, index: number }) => {
   return (
-    <Card key={project.id} className="flex flex-col overflow-hidden transform transition-transform duration-300 ease-in-out shadow-lg hover:shadow-primary/10 border-accent animate-fade-in bg-card/70 backdrop-blur-sm" style={{ animationDelay: `${index * 100}ms`}}>
+    <Card key={project.id} className="flex flex-col overflow-hidden transform transition-transform duration-300 ease-in-out shadow-lg hover:shadow-primary/10 border-accent/50 animate-fade-in bg-card/50 backdrop-blur-lg rounded-2xl" style={{ animationDelay: `${index * 100}ms`}}>
       <CardContent className="flex-grow p-6 pt-6">
         <div className="flex flex-wrap gap-2 mb-4">
           {project.tags.map(tag => (
