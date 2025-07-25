@@ -8,26 +8,26 @@ const socialLinks = [
     name: 'WhatsApp',
     handle: 'For a quick chat',
     href: '#',
-    icon: <WhatsAppIcon className="h-8 w-8 text-white" />,
+    icon: <WhatsAppIcon className="h-6 w-6 text-muted-foreground" />,
     preferred: true
   },
   {
     name: 'Instagram',
     handle: 'The highlight reel',
     href: '#',
-    icon: <Instagram className="h-8 w-8 text-white" />
+    icon: <Instagram className="h-6 w-6 text-muted-foreground" />
   },
   {
     name: 'LinkedIn',
     handle: 'The professional side',
     href: '#',
-    icon: <Linkedin className="h-8 w-8 text-white" />
+    icon: <Linkedin className="h-6 w-6 text-muted-foreground" />
   },
   {
     name: 'GitHub',
     handle: 'Where the code lives',
     href: '#',
-    icon: <Github className="h-8 w-8 text-white" />
+    icon: <Github className="h-6 w-6 text-muted-foreground" />
   }
 ];
 
@@ -48,11 +48,11 @@ export default function SocialsSection() {
             <a href={link.href} key={index} target="_blank" rel="noopener noreferrer" className="pointer-events-none">
               <Card className="bg-background/50 backdrop-blur-sm border border-accent hover:border-accent transition-all duration-300 h-48 flex flex-col items-center justify-center text-center p-6 rounded-2xl shadow-lg hover:shadow-primary/10">
                 <CardContent className="flex flex-col items-center justify-center gap-2 p-0">
-                  <div className={`h-16 w-16 rounded-full flex items-center justify-center mb-2 border ${link.preferred ? 'border-green-500' : 'border-muted-foreground'}`}>
+                  <div className={`h-12 w-12 rounded-full flex items-center justify-center mb-2 border ${link.preferred ? 'border-green-500' : 'border-muted-foreground'}`}>
                     {link.icon}
                   </div>
-                  <p className="font-semibold text-foreground">{link.name}</p>
-                  <p className={`text-sm ${link.preferred ? 'text-green-500' : 'text-muted-foreground'}`}>{link.handle}</p>
+                  <p className="text-sm font-semibold text-foreground">{link.name}</p>
+                  <p className={`text-xs ${link.preferred ? 'text-green-500' : 'text-muted-foreground'}`}>{link.handle}</p>
                 </CardContent>
               </Card>
             </a>
