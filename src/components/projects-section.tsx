@@ -15,7 +15,7 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
     <Card 
       ref={cardRef}
       key={project.id} 
-      className="group flex flex-col overflow-hidden transform transition-transform duration-300 ease-in-out shadow-lg hover:shadow-primary/10 animate-fade-in bg-card/50 backdrop-blur-sm rounded-2xl relative" 
+      className="group flex flex-col overflow-hidden transform transition-transform duration-300 ease-in-out shadow-lg hover:shadow-primary/10 animate-fade-in bg-card/20 backdrop-blur-sm rounded-2xl relative" 
       style={{ animationDelay: `${index * 100}ms`}}
     >
        <div 

@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import WhatsAppIcon from '@/components/icons/whatsapp-icon';
 import { useSpotlight } from '@/hooks/use-spotlight';
 import { useRef } from 'react';
+import { cn } from '@/lib/utils';
 
 
 const socialLinks = [
@@ -14,6 +15,7 @@ const socialLinks = [
     icon: Phone,
     color: 'text-[#25D366]',
     borderColor: 'border-[#25D366]',
+    isPersistent: true,
   },
   {
     name: 'Instagram',
@@ -48,17 +50,17 @@ const SocialCard = ({ link, index }: { link: (typeof socialLinks)[0], index: num
   
   return (
     <a href={link.href} key={index} target="_blank" rel="noopener noreferrer">
-      <Card ref={cardRef} className="group bg-card/50 backdrop-blur-sm hover:border-muted-foreground/50 transition-all duration-300 h-48 flex flex-col items-center justify-center text-center p-6 rounded-2xl shadow-lg hover:shadow-primary/10 relative">
+      <Card ref={cardRef} className="group bg-card/20 backdrop-blur-sm hover:border-muted-foreground/50 transition-all duration-300 h-48 flex flex-col items-center justify-center text-center p-6 rounded-2xl shadow-lg hover:shadow-primary/10 relative">
         <div 
           className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={spotlightStyle}
         />
         <div className="relative z-10">
           <CardContent className="flex flex-col items-center justify-center gap-2 p-0">
-            <div className={`h-10 w-10 rounded-full flex items-center justify-center mb-2 border border-muted-foreground transition-colors ${link.borderColor}`}>
-              <Icon className={`h-4 w-4 text-muted-foreground transition-colors ${link.color}`} />
+            <div className={cn('h-10 w-10 rounded-full flex items-center justify-center mb-2 border transition-colors', link.isPersistent ? link.borderColor : `border-muted-foreground ${link.borderColor}`)}>
+              <Icon className={cn('h-4 w-4 transition-colors', link.isPersistent ? link.color : `text-muted-foreground ${link.color}`)} />
             </div>
-            <p className={`text-sm font-semibold text-foreground transition-colors ${link.color}`}>{link.name}</p>
+            <p className={cn('text-sm font-semibold transition-colors', link.isPersistent ? link.color : `text-foreground ${link.color}`)}>{link.name}</p>
             <p className="text-xs text-muted-foreground">{link.handle}</p>
           </CardContent>
         </div>
