@@ -14,7 +14,6 @@ const socialLinks = [
     icon: WhatsAppIcon,
     color: 'text-[#25D366]',
     borderColor: 'border-[#25D366]',
-    textColor: 'text-[#25D366]',
   },
   {
     name: 'Instagram',
@@ -23,7 +22,6 @@ const socialLinks = [
     icon: Instagram,
     color: 'group-hover:text-[#E4405F]',
     borderColor: 'group-hover:border-[#E4405F]',
-    textColor: 'group-hover:text-[#E4405F]',
   },
   {
     name: 'LinkedIn',
@@ -32,7 +30,6 @@ const socialLinks = [
     icon: Linkedin,
     color: 'group-hover:text-[#0A66C2]',
     borderColor: 'group-hover:border-[#0A66C2]',
-    textColor: 'group-hover:text-[#0A66C2]',
   },
   {
     name: 'GitHub',
@@ -41,7 +38,6 @@ const socialLinks = [
     icon: Github,
     color: 'group-hover:text-white',
     borderColor: 'group-hover:border-white',
-    textColor: 'group-hover:text-white',
   }
 ];
 
@@ -61,8 +57,8 @@ const SocialCard = ({ link, index }: { link: (typeof socialLinks)[0], index: num
           <div className={`h-12 w-12 rounded-full flex items-center justify-center mb-2 border border-muted-foreground transition-colors ${link.borderColor}`}>
             <Icon className={`h-5 w-5 text-muted-foreground transition-colors ${link.color}`} />
           </div>
-          <p className="text-sm font-semibold text-foreground">{link.name}</p>
-          <p className={`text-xs text-muted-foreground transition-colors ${link.textColor}`}>{link.handle}</p>
+          <p className={`text-sm font-semibold text-foreground transition-colors ${link.color}`}>{link.name}</p>
+          <p className="text-xs text-muted-foreground">{link.handle}</p>
         </CardContent>
       </Card>
     </a>
