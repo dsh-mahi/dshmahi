@@ -54,7 +54,7 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
 export default function ProjectsSection({ projects }: { projects: Project[] }) {
   const clientProjects = projects.filter(p => p.category === 'Client');
   const personalProjects = projects.filter(p => p.category === 'Personal');
-  const [activeTab, setActiveTab] = useState('client');
+  const [activeTab, setActiveTab] = useState('personal');
 
   return (
     <section id="projects" className="min-h-screen w-full py-24 px-4 sm:px-6 lg:px-8 bg-transparent flex flex-col items-center justify-center">
@@ -68,21 +68,14 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
             <div className="flex items-start justify-start md:justify-end">
                 <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full md:w-auto">
                 <TabsList className="grid w-full grid-cols-2 md:w-auto bg-card/70 backdrop-blur-sm">
-                    <TabsTrigger value="client">Client ({clientProjects.length})</TabsTrigger>
                     <TabsTrigger value="personal">Personal ({personalProjects.length})</TabsTrigger>
+                    <TabsTrigger value="client">Client ({clientProjects.length})</TabsTrigger>
                 </TabsList>
                 </Tabs>
             </div>
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsContent value="client">
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {clientProjects.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} />
-              ))}
-            </div>
-          </TabsContent>
           <TabsContent value="personal">
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {personalProjects.map((project, index) => (
@@ -94,6 +87,13 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
                 <p className="text-muted-foreground">No personal projects to show yet.</p>
               </div>
             )}
+          </TabsContent>
+          <TabsContent value="client">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {clientProjects.map((project, index) => (
+                <ProjectCard key={project.id} project={project} index={index} />
+              ))}
+            </div>
           </TabsContent>
         </Tabs>
       </div>
