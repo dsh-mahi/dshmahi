@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import ParticleBackground from '@/components/particle-background';
+import DateTime from '@/components/date-time';
 
 export const metadata: Metadata = {
   title: 'Dsh Mahi',
@@ -25,6 +26,7 @@ export default function RootLayout({
         <div className="relative z-10">
           {children}
         </div>
+        <DateTime />
         <Toaster />
       </body>
     </html>

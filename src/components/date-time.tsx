@@ -15,7 +15,7 @@ export default function DateTime() {
   }, []);
 
   if (!hydrated) {
-    return <div className="w-40 h-8" />;
+    return <div className="w-40 h-10" />;
   }
 
   const formatDate = (d: Date) => {
@@ -27,7 +27,7 @@ export default function DateTime() {
   };
 
   return (
-    <div className="hidden md:flex flex-col items-center text-xs text-muted-foreground transition-opacity duration-500 ease-in-out opacity-100">
+    <div className="fixed bottom-4 right-4 z-50 hidden md:flex flex-col items-center text-xs text-muted-foreground transition-opacity duration-500 ease-in-out opacity-100 bg-background/50 backdrop-blur-sm border border-accent rounded-lg p-2 px-3">
       <p>{formatDate(date)}</p>
       <p>{date.toLocaleTimeString()}</p>
     </div>
