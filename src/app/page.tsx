@@ -15,15 +15,18 @@ export interface Project {
   category: 'Client' | 'Personal';
   techStack: string[];
   projectUrl: string;
+  logoUrl?: string;
+  siteUrl: string;
+  tags: string[];
 }
 
 const initialProjects: Project[] = [
-    { id: 1, title: 'E-commerce Platform', description: 'A full-stack e-commerce website with payment integration and a custom CMS.', category: 'Client', techStack: ['Next.js', 'Stripe', 'Firebase', 'Tailwind CSS'], projectUrl: '#' },
-    { id: 2, title: 'Portfolio Website', description: 'A sleek, modern portfolio for a freelance photographer, focusing on visuals.', category: 'Client', techStack: ['React', 'Framer Motion', 'Contentful'], projectUrl: '#' },
-    { id: 3, title: 'Task Management App', description: 'A React-based task management tool with drag-and-drop functionality.', category: 'Personal', techStack: ['React', 'Redux', 'Node.js', 'MongoDB'], projectUrl: '#' },
-    { id: 4, title: 'Weather Dashboard', description: 'A web app that displays real-time weather data from a third-party API.', category: 'Personal', techStack: ['Vue.js', 'OpenWeatherMap API', 'Chart.js'], projectUrl: '#' },
-    { id: 5, title: 'Music Player UI', description: 'A UI/UX concept for a minimalist music player application.', category: 'Personal', techStack: ['Figma', 'Vite', 'TypeScript'], projectUrl: '#' },
-    { id: 6, title: 'Booking System', description: 'A reservation system for a local restaurant, built with Next.js and Firebase.', category: 'Client', techStack: ['Next.js', 'Firebase Auth', 'Firestore'], projectUrl: '#' },
+    { id: 1, title: 'Aetheria', description: 'Making it easy to get into the daily self-care rituals of everyone. We\'re on a mission to make every moment of your skincare and bodycare experience fun, fragrant, and joyous, all while embracing honest beauty formula and transparency from the inside out.', category: 'Client', techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Sanity'], projectUrl: '#', logoUrl: '/logos/aetheria.svg', siteUrl: 'aetheriaselfcare.com', tags: ['E-commerce', 'Client'] },
+    { id: 2, title: 'Dohora', description: 'Dohora, founded in 2020, is a women-led fragrance brand celebrating individuality through scent. From rich orientals to elegant florals and sweet gourmands, each fragrance is crafted to evoke emotion.', category: 'Client', techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Sanity'], projectUrl: '#', logoUrl: '/logos/dohora.svg', siteUrl: 'dohoralifestyle.com', tags: ['E-commerce', 'Client'] },
+    { id: 3, title: 'Inads Group', description: 'Inads Group is a Media & Advertising company from Qatar that offers a wide range of services to help businesses grow and succeed. I created a modern, professional website that showcases their expertise and services.', category: 'Client', techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'], projectUrl: '#', logoUrl: '/logos/inads.svg', siteUrl: 'inadsgroup.com', tags: ['Business Website', 'Client'] },
+    { id: 4, title: 'NordCycle', description: 'ACE specializes in recycling hard-to-recycle plastics, turning waste into sustainable materials through innovative technology and eco-friendly processes. We give new life to plastics that would otherwise pollute the environment.', category: 'Client', techStack: ['SvelteKit', 'TypeScript', 'Tailwind CSS', 'Vercel'], projectUrl: '#', logoUrl: '/logos/nordcycle.svg', siteUrl: 'nordcycle.com', tags: ['Business Website', 'Client', 'Work In Progress'] },
+    { id: 5, title: 'Task Management App', description: 'A React-based task management tool with drag-and-drop functionality.', category: 'Personal', techStack: ['React', 'Redux', 'Node.js', 'MongoDB'], projectUrl: '#', siteUrl: "task-manager.com", tags: ['Web App', 'Personal'] },
+    { id: 6, title: 'Weather Dashboard', description: 'A web app that displays real-time weather data from a third-party API.', category: 'Personal', techStack: ['Vue.js', 'OpenWeatherMap API', 'Chart.js'], projectUrl: '#', siteUrl: "weather-app.com", tags: ['Web App', 'Personal'] },
   ];
 
 

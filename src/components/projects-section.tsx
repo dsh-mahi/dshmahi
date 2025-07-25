@@ -1,75 +1,130 @@
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from '@/components/ui/button';
+'use client';
+
+import { useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import type { Project } from '../app/page';
-import { ArrowRight } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import NextIcon from 'public/logos/next.svg';
+import TypescriptIcon from 'public/logos/typescript.svg';
+import TailwindIcon from 'public/logos/tailwind.svg';
+import StripeIcon from 'public/logos/stripe.svg';
+import SanityIcon from 'public/logos/sanity.svg';
+import FramerIcon from 'public/logos/framer.svg';
+import SvelteIcon from 'public/logos/svelte.svg';
+import VercelIcon from 'public/logos/vercel.svg';
+import ReactIcon from 'public/logos/react.svg';
+import MongoIcon from 'public/logos/mongo.svg';
+import NodeIcon from 'public/logos/node.svg';
+import VueIcon from 'public/logos/vue.svg';
+import ChartjsIcon from 'public/logos/chartjs.svg';
+import OpenWeatherMapIcon from 'public/logos/openweathermap.svg';
+import DefaultLogo from 'public/logos/default.svg';
 
-interface ProjectsSectionProps {
-  projects: Project[];
-}
+const techIconMap: { [key: string]: React.ComponentType<React.SVGProps<SVGSVGElement>> } = {
+  'Next.js': NextIcon,
+  'TypeScript': TypescriptIcon,
+  'Tailwind CSS': TailwindIcon,
+  'Stripe': StripeIcon,
+  'Sanity': SanityIcon,
+  'Framer Motion': FramerIcon,
+  'SvelteKit': SvelteIcon,
+  'Vercel': VercelIcon,
+  'React': ReactIcon,
+  'Redux': ReactIcon, // No specific Redux icon, using React
+  'MongoDB': MongoIcon,
+  'Node.js': NodeIcon,
+  'Vue.js': VueIcon,
+  'Chart.js': ChartjsIcon,
+  'OpenWeatherMap API': OpenWeatherMapIcon,
+};
 
-const ProjectCard = ({ project, index }: { project: Project, index: number }) => (
-  <Card key={project.id} className="flex flex-col overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 ease-in-out shadow-lg hover:shadow-primary/10 border-accent animate-fade-in" style={{ animationDelay: `${index * 100}ms`}}>
-    <CardHeader className="p-6">
-      <Badge variant="secondary" className="mb-3 w-fit">{project.category}</Badge>
-      <CardTitle>{project.title}</CardTitle>
-    </CardHeader>
-    <CardContent className="flex-grow p-6 pt-0">
-      <CardDescription>{project.description}</CardDescription>
-      <div className="mt-4">
-        <h4 className="font-semibold text-sm text-foreground mb-2">Tech Stack</h4>
-        <div className="flex flex-wrap gap-2">
-          {project.techStack.map(tech => (
-            <Badge key={tech} variant="outline">{tech}</Badge>
+
+const ProjectCard = ({ project, index }: { project: Project, index: number }) => {
+  const Logo = project.logoUrl ? (
+    <img src={project.logoUrl} alt={`${project.title} logo`} className="h-8 w-8 rounded-full" />
+  ) : (
+    <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center">
+       <DefaultLogo className="h-5 w-5 text-muted-foreground" />
+    </div>
+  );
+
+  return (
+    <Card key={project.id} className="flex flex-col overflow-hidden transform transition-transform duration-300 ease-in-out shadow-lg hover:shadow-primary/10 border-accent animate-fade-in bg-card/70 backdrop-blur-sm" style={{ animationDelay: `${index * 100}ms`}}>
+      <CardContent className="flex-grow p-6 pt-6">
+        <div className="flex flex-wrap gap-2 mb-4">
+          {project.tags.map(tag => (
+            <Badge key={tag} variant={tag === 'Work In Progress' ? 'destructive' : 'secondary'} className="capitalize">{tag}</Badge>
           ))}
         </div>
-      </div>
-    </CardContent>
-    <CardFooter className="p-6 pt-0">
-      <Button asChild variant="link" className="p-0 text-foreground hover:text-primary">
-        <a href={project.projectUrl} target="_blank" rel="noopener noreferrer">
-          View Project <ArrowRight className="ml-2 h-4 w-4" />
-        </a>
-      </Button>
-    </CardFooter>
-  </Card>
-);
+        <div className="flex items-center gap-3 mb-4">
+          {Logo}
+          <div>
+            <CardTitle className="text-xl">{project.title}</CardTitle>
+            <a href={`http://${project.siteUrl}`} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:underline">
+              {project.siteUrl}
+            </a>
+          </div>
+        </div>
+        <CardDescription className="mb-4">{project.description}</CardDescription>
+        <div className="flex flex-wrap gap-3">
+          {project.techStack.map(tech => {
+            const Icon = techIconMap[tech];
+            return Icon ? <Icon key={tech} className="h-6 w-6" title={tech}/> : null;
+          })}
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
 
 export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   const clientProjects = projects.filter(p => p.category === 'Client');
   const personalProjects = projects.filter(p => p.category === 'Personal');
+  const [activeTab, setActiveTab] = useState('client');
 
   return (
-    <section id="projects" className="min-h-screen w-full py-24 px-4 sm:px-6 lg:px-8 bg-background flex flex-col items-center justify-center">
-      <div className="max-w-7xl mx-auto text-center mb-12">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4">My Work</h2>
-        <p className="text-lg text-muted-foreground">A selection of my client and personal projects.</p>
-      </div>
-
+    <section id="projects" className="min-h-screen w-full py-24 px-4 sm:px-6 lg:px-8 bg-transparent flex flex-col items-center justify-center">
       <div className="max-w-7xl mx-auto w-full">
-        {clientProjects.length > 0 && (
-          <div className="mb-16">
-            <h3 className="text-3xl md:text-4xl font-bold mb-8 text-center">Client Projects</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div className="md:col-span-2">
+                <p className="text-sm font-bold uppercase text-muted-foreground mb-2">Projects</p>
+                <h2 className="text-4xl md:text-5xl font-bold mb-4">Brands I've worked with</h2>
+                <p className="text-lg text-muted-foreground">Here I flex about what I've done so far. Applause optional, gasping encouraged. Feel free to rant!</p>
+            </div>
+            <div className="flex items-start justify-start md:justify-end">
+                <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full md:w-auto">
+                <TabsList className="grid w-full grid-cols-2 md:w-auto bg-card/70 backdrop-blur-sm">
+                    <TabsTrigger value="client">Client ({clientProjects.length})</TabsTrigger>
+                    <TabsTrigger value="personal">Personal ({personalProjects.length})</TabsTrigger>
+                </TabsList>
+                </Tabs>
+            </div>
+        </div>
+
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsContent value="client">
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {clientProjects.map((project, index) => (
                 <ProjectCard key={project.id} project={project} index={index} />
               ))}
             </div>
-          </div>
-        )}
-
-        {personalProjects.length > 0 && (
-          <div>
-            <h3 className="text-3xl md:text-4xl font-bold mb-8 text-center">Personal Projects</h3>
+          </TabsContent>
+          <TabsContent value="personal">
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {personalProjects.map((project, index) => (
                 <ProjectCard key={project.id} project={project} index={index} />
               ))}
             </div>
-          </div>
-        )}
+          </TabsContent>
+        </Tabs>
       </div>
     </section>
   );
+}
+
+interface ProjectsSectionProps {
+  projects: Project[];
 }
