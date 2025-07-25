@@ -64,6 +64,7 @@ export default function Home() {
       <SocialsSection />
       <footer className="text-center text-muted-foreground py-8 px-4">
         <p>&copy; {new Date().getFullYear()} Dsh Mahi. All Rights Reserved.</p>
+        <p className="text-xs mt-2">Crafted by human hands and AI minds.</p>
       </footer>
     </main>
   );

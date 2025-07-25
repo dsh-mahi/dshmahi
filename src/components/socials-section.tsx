@@ -6,7 +6,7 @@ import WhatsAppIcon from '@/components/icons/whatsapp-icon';
 const socialLinks = [
   {
     name: 'WhatsApp',
-    handle: 'Preferred for quick chats',
+    handle: 'For a quick chat',
     href: '#',
     icon: <WhatsAppIcon className="h-8 w-8 text-white" />,
     preferred: true
@@ -37,16 +37,16 @@ export default function SocialsSection() {
       <div className="max-w-7xl mx-auto w-full">
         <div className="text-left mb-12">
           <p className="text-sm font-bold uppercase text-muted-foreground mb-2">Connect</p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Let's Build Something Awesome</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Let's Create Together</h2>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            My digital door is always open. Whether you have a question, a project, or just want to say hi, I'll try my best to get back to you!
+            My digital door is always open. Whether you have a question, a project, or just want to geek out about code, I'm here for it.
           </p>
         </div>
         <hr className="border-accent mb-12" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {socialLinks.map((link, index) => (
-            <a href={link.href} key={index} target="_blank" rel="noopener noreferrer">
-              <Card className="bg-white/5 backdrop-blur-xl border border-accent/50 hover:border-accent transition-all duration-300 h-48 flex flex-col items-center justify-center text-center p-6 rounded-2xl shadow-lg hover:shadow-primary/10">
+            <a href={link.href} key={index} target="_blank" rel="noopener noreferrer" className="pointer-events-none">
+              <Card className="bg-white/10 backdrop-blur-xl border border-accent/50 hover:border-accent transition-all duration-300 h-48 flex flex-col items-center justify-center text-center p-6 rounded-2xl shadow-lg hover:shadow-primary/10">
                 <CardContent className="flex flex-col items-center justify-center gap-2 p-0">
                   <div className={`h-16 w-16 rounded-full flex items-center justify-center mb-2 border ${link.preferred ? 'border-green-500' : 'border-muted-foreground'}`}>
                     {link.icon}
