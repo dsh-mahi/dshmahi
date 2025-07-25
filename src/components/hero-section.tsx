@@ -43,7 +43,6 @@ export default function HeroSection({ onPersonalize, isPersonalizing }: HeroSect
 
   return (
     <section id="hero" className="h-screen w-full flex flex-col justify-center items-center text-center relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('https://placehold.co/1920x1080')] bg-cover bg-center bg-fixed opacity-10" data-ai-hint="abstract geometric"></div>
       <div className="z-10 p-4">
         {greeting ? (
           <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in max-w-4xl mx-auto">{greeting.greeting}</h1>

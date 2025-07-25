@@ -13,19 +13,18 @@ export interface Project {
   title: string;
   description: string;
   category: 'Client' | 'Personal';
-  imageUrl: string;
+  techStack: string[];
   projectUrl: string;
-  aiHint: string;
 }
 
 const initialProjects: Project[] = [
-  { id: 1, title: 'E-commerce Platform', description: 'A full-stack e-commerce website with payment integration and a custom CMS.', category: 'Client', imageUrl: 'https://placehold.co/600x400', projectUrl: '#', aiHint: 'online store' },
-  { id: 2, title: 'Portfolio Website', description: 'A sleek, modern portfolio for a freelance photographer, focusing on visuals.', category: 'Client', imageUrl: 'https://placehold.co/600x400', projectUrl: '#', aiHint: 'photography portfolio' },
-  { id: 3, title: 'Task Management App', description: 'A React-based task management tool with drag-and-drop functionality.', category: 'Personal', imageUrl: 'https://placehold.co/600x400', projectUrl: '#', aiHint: 'productivity app' },
-  { id: 4, title: 'Weather Dashboard', description: 'A web app that displays real-time weather data from a third-party API.', category: 'Personal', imageUrl: 'https://placehold.co/600x400', projectUrl: '#', aiHint: 'weather forecast' },
-  { id: 5, title: 'Music Player UI', description: 'A UI/UX concept for a minimalist music player application.', category: 'Personal', imageUrl: 'https://placehold.co/600x400', projectUrl: '#', aiHint: 'music app' },
-  { id: 6, title: 'Booking System', description: 'A reservation system for a local restaurant, built with Next.js and Firebase.', category: 'Client', imageUrl: 'https://placehold.co/600x400', projectUrl: '#', aiHint: 'reservation system' },
-];
+    { id: 1, title: 'E-commerce Platform', description: 'A full-stack e-commerce website with payment integration and a custom CMS.', category: 'Client', techStack: ['Next.js', 'Stripe', 'Firebase', 'Tailwind CSS'], projectUrl: '#' },
+    { id: 2, title: 'Portfolio Website', description: 'A sleek, modern portfolio for a freelance photographer, focusing on visuals.', category: 'Client', techStack: ['React', 'Framer Motion', 'Contentful'], projectUrl: '#' },
+    { id: 3, title: 'Task Management App', description: 'A React-based task management tool with drag-and-drop functionality.', category: 'Personal', techStack: ['React', 'Redux', 'Node.js', 'MongoDB'], projectUrl: '#' },
+    { id: 4, title: 'Weather Dashboard', description: 'A web app that displays real-time weather data from a third-party API.', category: 'Personal', techStack: ['Vue.js', 'OpenWeatherMap API', 'Chart.js'], projectUrl: '#' },
+    { id: 5, title: 'Music Player UI', description: 'A UI/UX concept for a minimalist music player application.', category: 'Personal', techStack: ['Figma', 'Vite', 'TypeScript'], projectUrl: '#' },
+    { id: 6, title: 'Booking System', description: 'A reservation system for a local restaurant, built with Next.js and Firebase.', category: 'Client', techStack: ['Next.js', 'Firebase Auth', 'Firestore'], projectUrl: '#' },
+  ];
 
 
 export default function Home() {
