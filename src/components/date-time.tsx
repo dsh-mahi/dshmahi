@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { Calendar, Clock } from 'lucide-react';
 
 export default function DateTime() {
   const [hydrated, setHydrated] = useState(false);
@@ -15,7 +16,7 @@ export default function DateTime() {
   }, []);
 
   if (!hydrated) {
-    return <div className="w-40 h-10" />;
+    return <div className="w-48 h-10" />;
   }
 
   const formatDate = (d: Date) => {
@@ -27,9 +28,15 @@ export default function DateTime() {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col items-center text-xs text-muted-foreground transition-opacity duration-500 ease-in-out opacity-100 bg-background/50 backdrop-blur-sm border border-accent rounded-lg p-2 px-3">
-      <p>{formatDate(date)}</p>
-      <p>{date.toLocaleTimeString()}</p>
+    <div className="fixed bottom-4 right-4 z-50 flex items-center gap-4 text-xs text-muted-foreground transition-opacity duration-500 ease-in-out opacity-100 bg-background/50 backdrop-blur-sm border border-accent rounded-full p-2 px-4">
+      <div className="flex items-center gap-2">
+        <Calendar className="h-4 w-4" />
+        <span>{formatDate(date)}</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <Clock className="h-4 w-4" />
+        <span>{date.toLocaleTimeString()}</span>
+      </div>
     </div>
   );
 }
