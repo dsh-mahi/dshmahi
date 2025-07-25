@@ -1,35 +1,60 @@
+'use client';
 import { Github, Instagram, Linkedin } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import WhatsAppIcon from '@/components/icons/whatsapp-icon';
+import { useSpotlight } from '@/hooks/use-spotlight';
+import { useRef } from 'react';
 
 
 const socialLinks = [
   {
     name: 'WhatsApp',
-    handle: 'For a quick chat',
+    handle: 'Let\'s have a chat!',
     href: '#',
-    icon: <WhatsAppIcon className="h-5 w-5 text-muted-foreground" />,
-    preferred: true
+    icon: <WhatsAppIcon className="h-5 w-5 text-muted-foreground group-hover:text-[#25D366] transition-colors" />,
   },
   {
     name: 'Instagram',
-    handle: 'The highlight reel',
+    handle: 'My creative side',
     href: '#',
-    icon: <Instagram className="h-5 w-5 text-muted-foreground" />
+    icon: <Instagram className="h-5 w-5 text-muted-foreground group-hover:text-[#E4405F] transition-colors" />
   },
   {
     name: 'LinkedIn',
-    handle: 'The professional side',
+    handle: 'My professional network',
     href: '#',
-    icon: <Linkedin className="h-5 w-5 text-muted-foreground" />
+    icon: <Linkedin className="h-5 w-5 text-muted-foreground group-hover:text-[#0A66C2] transition-colors" />
   },
   {
     name: 'GitHub',
-    handle: 'Where the code lives',
+    handle: 'My code repository',
     href: '#',
-    icon: <Github className="h-5 w-5 text-muted-foreground" />
+    icon: <Github className="h-5 w-5 text-muted-foreground group-hover:text-white transition-colors" />
   }
 ];
+
+const SocialCard = ({ link, index }: { link: (typeof socialLinks)[0], index: number }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const { spotlightStyle } = useSpotlight(cardRef);
+  
+  return (
+    <a href={link.href} key={index} target="_blank" rel="noopener noreferrer">
+      <Card ref={cardRef} className="group bg-background/70 backdrop-blur-sm border-black hover:border-muted-foreground/50 transition-all duration-300 h-48 flex flex-col items-center justify-center text-center p-6 rounded-2xl shadow-lg hover:shadow-primary/10 relative">
+        <div 
+          className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          style={spotlightStyle}
+        />
+        <CardContent className="flex flex-col items-center justify-center gap-2 p-0">
+          <div className="h-12 w-12 rounded-full flex items-center justify-center mb-2 border border-muted-foreground">
+            {link.icon}
+          </div>
+          <p className="text-sm font-semibold text-foreground">{link.name}</p>
+          <p className="text-xs text-muted-foreground">{link.handle}</p>
+        </CardContent>
+      </Card>
+    </a>
+  )
+}
 
 export default function SocialsSection() {
   return (
@@ -37,25 +62,15 @@ export default function SocialsSection() {
       <div className="max-w-7xl mx-auto w-full">
         <div className="text-left mb-12">
           <p className="text-sm font-bold uppercase text-muted-foreground mb-2">Connect</p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Let's Create Together</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Let's Build Something Great</h2>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            Got a project, a question, or a coffee invitation? My inbox is ready. Let's make something amazing.
+            Have an idea, a project, or just want to say hi? My digital door is always open. Let's connect and create!
           </p>
         </div>
         <hr className="border-accent mb-12" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {socialLinks.map((link, index) => (
-            <a href={link.href} key={index} target="_blank" rel="noopener noreferrer">
-              <Card className="bg-background/50 backdrop-blur-sm border border-accent hover:border-muted-foreground/50 transition-all duration-300 h-48 flex flex-col items-center justify-center text-center p-6 rounded-2xl shadow-lg hover:shadow-primary/10">
-                <CardContent className="flex flex-col items-center justify-center gap-2 p-0">
-                  <div className={`h-12 w-12 rounded-full flex items-center justify-center mb-2 border ${link.preferred ? 'border-green-500' : 'border-muted-foreground'}`}>
-                    {link.icon}
-                  </div>
-                  <p className="text-sm font-semibold text-foreground">{link.name}</p>
-                  <p className={`text-xs ${link.preferred ? 'text-green-500' : 'text-muted-foreground'}`}>{link.handle}</p>
-                </CardContent>
-              </Card>
-            </a>
+            <SocialCard link={link} index={index} key={index} />
           ))}
         </div>
       </div>

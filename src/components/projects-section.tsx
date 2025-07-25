@@ -1,14 +1,27 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
 import type { Project } from '../app/page';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useSpotlight } from '@/hooks/use-spotlight';
 
 const ProjectCard = ({ project, index }: { project: Project, index: number }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const { spotlightStyle } = useSpotlight(cardRef);
+
   return (
-    <Card key={project.id} className="flex flex-col overflow-hidden transform transition-transform duration-300 ease-in-out shadow-lg hover:shadow-primary/10 border-accent/50 animate-fade-in bg-background/50 backdrop-blur-sm rounded-2xl" style={{ animationDelay: `${index * 100}ms`}}>
+    <Card 
+      ref={cardRef}
+      key={project.id} 
+      className="group flex flex-col overflow-hidden transform transition-transform duration-300 ease-in-out shadow-lg hover:shadow-primary/10 border-black animate-fade-in bg-background/70 backdrop-blur-sm rounded-2xl relative" 
+      style={{ animationDelay: `${index * 100}ms`}}
+    >
+       <div 
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={spotlightStyle}
+      />
       <CardContent className="flex-grow p-6 pt-6">
         <div className="flex flex-wrap gap-2 mb-4">
           {project.tags.map(tag => (
