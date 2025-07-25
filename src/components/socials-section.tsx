@@ -11,31 +11,44 @@ const socialLinks = [
     name: 'WhatsApp',
     handle: 'Let\'s have a chat!',
     href: '#',
-    icon: <WhatsAppIcon className="h-5 w-5 text-[#25D366]" />,
+    icon: WhatsAppIcon,
+    color: 'text-[#25D366]',
+    borderColor: 'border-[#25D366]',
+    textColor: 'text-[#25D366]',
   },
   {
     name: 'Instagram',
     handle: 'My creative side',
     href: '#',
-    icon: <Instagram className="h-5 w-5 text-muted-foreground group-hover:text-[#E4405F] transition-colors" />
+    icon: Instagram,
+    color: 'group-hover:text-[#E4405F]',
+    borderColor: 'group-hover:border-[#E4405F]',
+    textColor: 'group-hover:text-[#E4405F]',
   },
   {
     name: 'LinkedIn',
     handle: 'My professional network',
     href: '#',
-    icon: <Linkedin className="h-5 w-5 text-muted-foreground group-hover:text-[#0A66C2] transition-colors" />
+    icon: Linkedin,
+    color: 'group-hover:text-[#0A66C2]',
+    borderColor: 'group-hover:border-[#0A66C2]',
+    textColor: 'group-hover:text-[#0A66C2]',
   },
   {
     name: 'GitHub',
     handle: 'My code repository',
     href: '#',
-    icon: <Github className="h-5 w-5 text-muted-foreground group-hover:text-white transition-colors" />
+    icon: Github,
+    color: 'group-hover:text-white',
+    borderColor: 'group-hover:border-white',
+    textColor: 'group-hover:text-white',
   }
 ];
 
 const SocialCard = ({ link, index }: { link: (typeof socialLinks)[0], index: number }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const { spotlightStyle } = useSpotlight(cardRef);
+  const Icon = link.icon;
   
   return (
     <a href={link.href} key={index} target="_blank" rel="noopener noreferrer">
@@ -45,11 +58,11 @@ const SocialCard = ({ link, index }: { link: (typeof socialLinks)[0], index: num
           style={spotlightStyle}
         />
         <CardContent className="flex flex-col items-center justify-center gap-2 p-0">
-          <div className="h-12 w-12 rounded-full flex items-center justify-center mb-2 border border-muted-foreground">
-            {link.icon}
+          <div className={`h-12 w-12 rounded-full flex items-center justify-center mb-2 border border-muted-foreground transition-colors ${link.borderColor}`}>
+            <Icon className={`h-5 w-5 text-muted-foreground transition-colors ${link.color}`} />
           </div>
           <p className="text-sm font-semibold text-foreground">{link.name}</p>
-          <p className="text-xs text-muted-foreground">{link.handle}</p>
+          <p className={`text-xs text-muted-foreground transition-colors ${link.textColor}`}>{link.handle}</p>
         </CardContent>
       </Card>
     </a>
