@@ -48,7 +48,7 @@ const SocialCard = ({ link, index }: { link: (typeof socialLinks)[0], index: num
   
   return (
     <a href={link.href} key={index} target="_blank" rel="noopener noreferrer">
-      <Card ref={cardRef} className="group bg-background/70 backdrop-blur-sm hover:border-muted-foreground/50 transition-all duration-300 h-48 flex flex-col items-center justify-center text-center p-6 rounded-2xl shadow-lg hover:shadow-primary/10 relative">
+      <Card ref={cardRef} className="group bg-card/50 backdrop-blur-sm hover:border-muted-foreground/50 transition-all duration-300 h-48 flex flex-col items-center justify-center text-center p-6 rounded-2xl shadow-lg hover:shadow-primary/10 relative">
         <div 
           className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={spotlightStyle}
