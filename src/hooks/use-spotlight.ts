@@ -17,11 +17,17 @@ export function useSpotlight(ref: React.RefObject<HTMLElement>) {
         y: e.clientY - rect.top,
       });
     };
+    
+    const handleMouseLeave = () => {
+        setPosition({ x: -100, y: -100 });
+    }
 
     el.addEventListener('mousemove', handleMouseMove);
+    el.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       el.removeEventListener('mousemove', handleMouseMove);
+      el.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, [ref]);
 
