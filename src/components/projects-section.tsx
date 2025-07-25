@@ -7,10 +7,6 @@ import type { Project } from '../app/page';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-import AetheriaLogo from '@/assets/logos/aetheria.svg';
-import DohoraLogo from '@/assets/logos/dohora.svg';
-import InadsLogo from '@/assets/logos/inads.svg';
-import NordcycleLogo from '@/assets/logos/nordcycle.svg';
 import NextIcon from '@/assets/logos/next.svg';
 import TypescriptIcon from '@/assets/logos/typescript.svg';
 import TailwindIcon from '@/assets/logos/tailwind.svg';
@@ -25,7 +21,6 @@ import NodeIcon from '@/assets/logos/node.svg';
 import VueIcon from '@/assets/logos/vue.svg';
 import ChartjsIcon from '@/assets/logos/chartjs.svg';
 import OpenWeatherMapIcon from '@/assets/logos/openweathermap.svg';
-import DefaultLogo from '@/assets/logos/default.svg';
 
 const techIconMap: { [key: string]: React.ComponentType<React.SVGProps<SVGSVGElement>> } = {
   'Next.js': NextIcon,
@@ -45,16 +40,9 @@ const techIconMap: { [key: string]: React.ComponentType<React.SVGProps<SVGSVGEle
   'OpenWeatherMap API': OpenWeatherMapIcon,
 };
 
-const logoMap: { [key: string]: React.ComponentType<React.SVGProps<SVGSVGElement>> } = {
-  Aetheria: AetheriaLogo,
-  Dohora: DohoraLogo,
-  Inads: InadsLogo,
-  NordCycle: NordcycleLogo,
-};
-
 
 const ProjectCard = ({ project, index }: { project: Project, index: number }) => {
-  const LogoComponent = logoMap[project.title] || DefaultLogo;
+  const LogoComponent = project.logo;
 
   return (
     <Card key={project.id} className="flex flex-col overflow-hidden transform transition-transform duration-300 ease-in-out shadow-lg hover:shadow-primary/10 border-accent animate-fade-in bg-card/70 backdrop-blur-sm" style={{ animationDelay: `${index * 100}ms`}}>
