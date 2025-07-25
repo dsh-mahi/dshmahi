@@ -62,6 +62,9 @@ export default function Home() {
       <HeroSection onPersonalize={handlePersonalizeProjects} isPersonalizing={isPersonalizing} />
       <ProjectsSection projects={projects} />
       <SocialsSection />
+      <footer className="text-center text-muted-foreground py-8 px-4">
+        <p>&copy; {new Date().getFullYear()} Dsh Mahi. All Rights Reserved.</p>
+      </footer>
     </main>
   );
 }
