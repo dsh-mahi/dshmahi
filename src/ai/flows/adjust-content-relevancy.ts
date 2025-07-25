@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -42,7 +43,7 @@ const prompt = ai.definePrompt({
 
 Given the following user interests:
 
-{{userInterests}}
+{{{userInterests}}}
 
 And the following list of content snippets:
 

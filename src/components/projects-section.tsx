@@ -32,7 +32,7 @@ const techIconMap: { [key: string]: React.ComponentType<React.SVGProps<SVGSVGEle
   'SvelteKit': SvelteIcon,
   'Vercel': VercelIcon,
   'React': ReactIcon,
-  'Redux': ReactIcon, 
+  'Redux': ReactIcon,
   'MongoDB': MongoIcon,
   'Node.js': NodeIcon,
   'Vue.js': VueIcon,
@@ -42,13 +42,7 @@ const techIconMap: { [key: string]: React.ComponentType<React.SVGProps<SVGSVGEle
 
 
 const ProjectCard = ({ project, index }: { project: Project, index: number }) => {
-  const Logo = project.logo ? (
-    <project.logo className="h-8 w-8 rounded-full" />
-  ) : (
-    <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center">
-       <DefaultLogo className="h-5 w-5 text-muted-foreground" />
-    </div>
-  );
+  const LogoComponent = project.logo || DefaultLogo;
 
   return (
     <Card key={project.id} className="flex flex-col overflow-hidden transform transition-transform duration-300 ease-in-out shadow-lg hover:shadow-primary/10 border-accent animate-fade-in bg-card/70 backdrop-blur-sm" style={{ animationDelay: `${index * 100}ms`}}>
@@ -59,7 +53,7 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
           ))}
         </div>
         <div className="flex items-center gap-3 mb-4">
-          {Logo}
+          <LogoComponent className="h-8 w-8 rounded-full" />
           <div>
             <CardTitle className="text-xl">{project.title}</CardTitle>
             <a href={`https://${project.siteUrl}`} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:underline">
@@ -80,7 +74,7 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
 };
 
 
-export default function ProjectsSection({ projects }: ProjectsSectionProps) {
+export default function ProjectsSection({ projects }: { projects: Project[] }) {
   const clientProjects = projects.filter(p => p.category === 'Client');
   const personalProjects = projects.filter(p => p.category === 'Personal');
   const [activeTab, setActiveTab] = useState('client');
@@ -123,8 +117,4 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
       </div>
     </section>
   );
-}
-
-interface ProjectsSectionProps {
-  projects: Project[];
 }
