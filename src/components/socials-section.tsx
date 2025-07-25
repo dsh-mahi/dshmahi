@@ -46,7 +46,7 @@ export default function SocialsSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {socialLinks.map((link, index) => (
             <a href={link.href} key={index} target="_blank" rel="noopener noreferrer" className="pointer-events-none">
-              <Card className="bg-white/10 backdrop-blur-xl border border-accent/50 hover:border-accent transition-all duration-300 h-48 flex flex-col items-center justify-center text-center p-6 rounded-2xl shadow-lg hover:shadow-primary/10">
+              <Card className="bg-black/40 backdrop-blur-xl border border-accent/50 hover:border-accent transition-all duration-300 h-48 flex flex-col items-center justify-center text-center p-6 rounded-2xl shadow-lg hover:shadow-primary/10">
                 <CardContent className="flex flex-col items-center justify-center gap-2 p-0">
                   <div className={`h-16 w-16 rounded-full flex items-center justify-center mb-2 border ${link.preferred ? 'border-green-500' : 'border-muted-foreground'}`}>
                     {link.icon}
