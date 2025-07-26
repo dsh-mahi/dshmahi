@@ -1,7 +1,6 @@
 'use client';
 import { Github, Instagram, Linkedin, Phone } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
-import WhatsAppIcon from '@/components/icons/whatsapp-icon';
 import { useSpotlight } from '@/hooks/use-spotlight';
 import { useRef } from 'react';
 import { cn } from '@/lib/utils';
