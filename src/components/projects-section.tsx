@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useRef } from 'react';
@@ -7,10 +8,26 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useSpotlight } from '@/hooks/use-spotlight';
 import { cn } from '@/lib/utils';
+import { Button } from './ui/button';
+import { PlayCircle } from 'lucide-react';
+import { Dialog, DialogContent } from './ui/dialog';
 
-const ProjectCard = ({ project, index, isIlluminated }: { project: Project, index: number, isIlluminated: boolean }) => {
+const ProjectCard = ({ project, index, isIlluminated, onPlayVideo }: { project: Project, index: number, isIlluminated: boolean, onPlayVideo: (url: string) => void }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const { spotlightStyle, maskStyle } = useSpotlight(cardRef);
+  const isYoutubeVideo = project.projectUrl.includes('youtube.com');
+
+  const getYouTubeEmbedUrl = (url: string) => {
+    const videoId = url.split('v=')[1];
+    if (videoId) {
+      const ampersandPosition = videoId.indexOf('&');
+      if (ampersandPosition !== -1) {
+        return `https://www.youtube.com/embed/${videoId.substring(0, ampersandPosition)}`;
+      }
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+    return '';
+  };
 
   return (
     <Card 
@@ -24,10 +41,10 @@ const ProjectCard = ({ project, index, isIlluminated }: { project: Project, inde
         style={spotlightStyle}
       />
       <div 
-        className="relative z-10 transition-all duration-300 h-full"
+        className="relative z-10 transition-all duration-300 h-full flex flex-col"
         style={!isIlluminated ? maskStyle : {}}
       >
-        <CardContent className="flex-grow p-6 pt-6 h-full flex flex-col">
+        <CardContent className="flex-grow p-6 pt-6 flex flex-col">
           <div className="flex flex-wrap gap-2 mb-4">
             {project.tags.map(tag => (
               <Badge key={tag} variant={tag === 'Work In Progress' ? 'destructive' : 'secondary'} className="capitalize">{tag}</Badge>
@@ -37,16 +54,28 @@ const ProjectCard = ({ project, index, isIlluminated }: { project: Project, inde
             <div className="h-8 w-8 bg-muted rounded-full" />
             <div>
               <CardTitle className="text-xl">{project.title}</CardTitle>
-              <a href={`https://${project.siteUrl}`} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:underline">
+              <a href={project.projectUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:underline">
                 {project.siteUrl}
               </a>
             </div>
           </div>
           <CardDescription className="mb-4 flex-grow">{project.description}</CardDescription>
-          <div className="flex flex-wrap gap-3">
-            {project.techStack.map(tech => (
-              <Badge key={tech} variant="outline" className="capitalize">{tech}</Badge>
-            ))}
+          
+          <div className="flex flex-wrap items-center gap-3 mt-auto pt-4">
+             {isYoutubeVideo ? (
+              <Button size="sm" variant="outline" onClick={() => onPlayVideo(project.projectUrl)}>
+                <PlayCircle className="mr-2 h-4 w-4" /> Watch Video
+              </Button>
+            ) : (
+               <Button size="sm" variant="outline" asChild>
+                <a href={project.projectUrl} target="_blank" rel="noopener noreferrer">View Project</a>
+              </Button>
+            )}
+            <div className="flex flex-wrap gap-2">
+              {project.techStack.map(tech => (
+                <Badge key={tech} variant="outline" className="capitalize">{tech}</Badge>
+              ))}
+            </div>
           </div>
         </CardContent>
       </div>
@@ -59,9 +88,28 @@ export default function ProjectsSection({ projects, isIlluminated }: { projects:
   const clientProjects = projects.filter(p => p.category === 'Client');
   const personalProjects = projects.filter(p => p.category === 'Personal');
   const [activeTab, setActiveTab] = useState('personal');
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
 
   const headerRef = useRef<HTMLDivElement>(null);
   const { spotlightStyle: headerSpotlight, maskStyle: headerMask } = useSpotlight(headerRef);
+
+  const handlePlayVideo = (url: string) => {
+    const embedUrl = getYouTubeEmbedUrl(url);
+    if(embedUrl) {
+      setVideoUrl(embedUrl);
+    }
+  }
+
+  const getYouTubeEmbedUrl = (url: string) => {
+    try {
+      const urlObj = new URL(url);
+      const videoId = urlObj.searchParams.get('v');
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+    } catch (error) {
+      console.error("Invalid YouTube URL", error);
+      return null;
+    }
+  };
 
   return (
     <section id="projects" className="min-h-screen w-full py-24 px-4 sm:px-6 lg:px-8 bg-transparent flex flex-col items-center justify-center">
@@ -72,7 +120,7 @@ export default function ProjectsSection({ projects, isIlluminated }: { projects:
               style={headerSpotlight}
             />
             <div 
-              className="md:col-span-2 transition-all duration-300"
+              className="md:col-span-2 transition-all duration-300 p-4"
               style={!isIlluminated ? headerMask : {}}
             >
                 <p className="text-sm font-bold uppercase text-muted-foreground mb-2">Projects</p>
@@ -93,7 +141,7 @@ export default function ProjectsSection({ projects, isIlluminated }: { projects:
           <TabsContent value="personal">
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {personalProjects.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} isIlluminated={isIlluminated} />
+                <ProjectCard key={project.id} project={project} index={index} isIlluminated={isIlluminated} onPlayVideo={handlePlayVideo} />
               ))}
             </div>
             {personalProjects.length === 0 && (
@@ -105,7 +153,7 @@ export default function ProjectsSection({ projects, isIlluminated }: { projects:
           <TabsContent value="client">
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {clientProjects.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} isIlluminated={isIlluminated} />
+                <ProjectCard key={project.id} project={project} index={index} isIlluminated={isIlluminated} onPlayVideo={handlePlayVideo} />
               ))}
             </div>
              {clientProjects.length === 0 && (
@@ -116,6 +164,24 @@ export default function ProjectsSection({ projects, isIlluminated }: { projects:
           </TabsContent>
         </Tabs>
       </div>
+
+       <Dialog open={!!videoUrl} onOpenChange={(isOpen) => !isOpen && setVideoUrl(null)}>
+        <DialogContent className="max-w-3xl h-auto p-0 border-0 bg-black">
+          {videoUrl && (
+            <div className="aspect-video">
+              <iframe
+                width="100%"
+                height="100%"
+                src={`${videoUrl}?autoplay=1`}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }

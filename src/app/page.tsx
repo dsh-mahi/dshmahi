@@ -30,7 +30,7 @@ const initialProjects: Project[] = [
       description: 'Created a realistic architectural visualization and animation of a structural design using Unreal Engine. All 3D assets were sourced from Fab Lab. The project focused on lighting, camera movement, and immersive walkthroughs to convey design intent.', 
       category: 'Personal', 
       techStack: ['Unreal Engine', 'Premier Pro', '3ds Max', 'Adobe Media Encode'], 
-      projectUrl: 'https://youtu.be/Zt2Q7511Jzk', 
+      projectUrl: 'https://www.youtube.com/watch?v=Zt2Q7511Jzk', 
       siteUrl: 'youtube.com', 
       tags: ['Visualization', 'Animation', 'Personal'] 
     },
@@ -40,7 +40,7 @@ const initialProjects: Project[] = [
       description: 'Produced a complete 3D commercial featuring an animated soda can. From UV-mapped textures to realistic lighting and smooth post-composition, the project blended multiple tools and disciplines for a dynamic product showcase.', 
       category: 'Personal', 
       techStack: ['Maya', 'Canva', 'V-Ray', 'After Effects', 'Premiere Pro', 'Adobe Media Encoder'], 
-      projectUrl: 'https://youtu.be/4Va01hofghA', 
+      projectUrl: 'https://www.youtube.com/watch?v=4Va01hofghA', 
       siteUrl: 'youtube.com', 
       tags: ['3D Animation', 'Motion Graphics', 'Personal'] 
     },
