@@ -24,10 +24,46 @@ export interface Project {
 }
 
 const initialProjects: Project[] = [
-    { id: 1, title: 'Aetheria', description: 'Making it easy to get into the daily self-care rituals of everyone. We\'re on a mission to make every moment of your skincare and bodycare experience fun, fragrant, and joyous, all while embracing honest beauty formula and transparency from the inside out.', category: 'Personal', techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Sanity'], projectUrl: '#', siteUrl: 'aetheriaselfcare.com', tags: ['E-commerce', 'Personal'] },
-    { id: 2, title: 'Dohora', description: 'Dohora, founded in 2020, is a women-led fragrance brand celebrating individuality through scent. From rich orientals to elegant florals and sweet gourmands, each fragrance is crafted to evoke emotion.', category: 'Personal', techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Sanity'], projectUrl: '#', siteUrl: 'dohoralifestyle.com', tags: ['E-commerce', 'Personal'] },
-    { id: 3, title: 'Inads Group', description: 'Inads Group is a Media & Advertising company from Qatar that offers a wide range of services to help businesses grow and succeed. I created a modern, professional website that showcases their expertise and services.', category: 'Personal', techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'], projectUrl: '#', siteUrl: 'inadsgroup.com', tags: ['Business Website', 'Personal'] },
-    { id: 4, title: 'NordCycle', description: 'ACE specializes in recycling hard-to-recycle plastics, turning waste into sustainable materials through innovative technology and eco-friendly processes. We give new life to plastics that would otherwise pollute the environment.', category: 'Personal', techStack: ['SvelteKit', 'TypeScript', 'Tailwind CSS', 'Vercel'], projectUrl: '#', siteUrl: 'nordcycle.com', tags: ['Business Website', 'Personal', 'Work In Progress'] },
+    { 
+      id: 1, 
+      title: 'Architectural Visualization Project', 
+      description: 'Created a realistic architectural visualization and animation of a structural design using Unreal Engine. All 3D assets were sourced from Fab Lab. The project focused on lighting, camera movement, and immersive walkthroughs to convey design intent.', 
+      category: 'Personal', 
+      techStack: ['Unreal Engine', 'Premier Pro', '3ds Max', 'Adobe Media Encode'], 
+      projectUrl: 'https://youtu.be/Zt2Q7511Jzk', 
+      siteUrl: 'youtube.com', 
+      tags: ['Visualization', 'Animation', 'Personal'] 
+    },
+    { 
+      id: 2, 
+      title: 'Soda Can Commercial', 
+      description: 'Produced a complete 3D commercial featuring an animated soda can. From UV-mapped textures to realistic lighting and smooth post-composition, the project blended multiple tools and disciplines for a dynamic product showcase.', 
+      category: 'Personal', 
+      techStack: ['Maya', 'Canva', 'V-Ray', 'After Effects', 'Premiere Pro', 'Adobe Media Encoder'], 
+      projectUrl: 'https://youtu.be/4Va01hofghA', 
+      siteUrl: 'youtube.com', 
+      tags: ['3D Animation', 'Motion Graphics', 'Personal'] 
+    },
+    { 
+      id: 3, 
+      title: 'MCT Landing Page (Enhanced)', 
+      description: 'Created and Revamped the Multimedia and Creative Technology (MCT) department landing page by integrating an AI-powered chatbot using Botpress AI-powered voice assistance using Elevenlabs Conversational AI and immersive AR/VR features through Convai.', 
+      category: 'Personal', 
+      techStack: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'Botpress', 'Elevenlabs', 'Convai', 'Unity'], 
+      projectUrl: 'https://dsh-mahi.github.io/multimedia-and-creative-technology/', 
+      siteUrl: 'dsh-mahi.github.io', 
+      tags: ['Web Development', 'AI', 'Personal'] 
+    },
+    { 
+      id: 4, 
+      title: 'SEO Optimization – Sip Hygiene', 
+      description: 'Achieved first-page rankings for multiple articles on a water bottle review website through strategic on-page SEO. Boosted article scores to 89–98/100 using keyword targeting, schema markup, and internal linking. Also optimized site performance to score 100/100 on mobile and 99/100 on desktop.', 
+      category: 'Personal', 
+      techStack: ['WordPress', 'Google PageSpeed Insights', 'Rank Math SEO', 'Schema Markup', 'Google Search Console'], 
+      projectUrl: 'https://drive.google.com/drive/folders/1AHSyldN73no-VHW5nsB3XLgZv4jIwK2A?usp=sharing', 
+      siteUrl: 'drive.google.com', 
+      tags: ['SEO', 'Performance Tuning', 'Personal'] 
+    },
   ];
 
 
