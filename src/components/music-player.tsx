@@ -1,61 +1,25 @@
 
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { Music, VolumeX } from 'lucide-react';
+import { Lightbulb, LightbulbOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-interface MusicPlayerProps {
-  onToggle?: () => void;
+interface LightToggleProps {
+  onToggleLight: () => void;
+  lightsOn: boolean;
 }
 
-export default function MusicPlayer({ onToggle }: MusicPlayerProps) {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
-
-  // A placeholder music track. Replace this with your desired audio file.
-  const musicSrc = "/background-music.mp3";
-
-  useEffect(() => {
-    // Autoplay is often restricted by browsers. 
-    // We'll attempt to play, but user interaction might be needed.
-    const playPromise = audioRef.current?.play();
-    if (playPromise !== undefined) {
-      playPromise.then(() => {
-        setIsPlaying(true);
-        if(onToggle) {
-          onToggle();
-        }
-      }).catch(error => {
-        console.log("Autoplay was prevented.", error);
-        setIsPlaying(false);
-      });
-    }
-  }, [onToggle]);
-
-  const togglePlay = () => {
-    if (isPlaying) {
-      audioRef.current?.pause();
-    } else {
-      audioRef.current?.play();
-    }
-    setIsPlaying(!isPlaying);
-    if(onToggle) {
-        onToggle();
-    }
-  };
-
+export default function MusicPlayer({ onToggleLight, lightsOn }: LightToggleProps) {
   return (
     <div className="fixed bottom-4 left-4 z-50">
-      <audio ref={audioRef} src={musicSrc} loop />
       <Button
         variant="outline"
         size="icon"
-        onClick={togglePlay}
+        onClick={onToggleLight}
         className="rounded-full bg-background/50 backdrop-blur-sm border-accent"
       >
-        {isPlaying ? <Music className="h-4 w-4" /> : <VolumeX className="h-4 w-4 text-muted-foreground" />}
-        <span className="sr-only">Toggle Music</span>
+        {lightsOn ? <Lightbulb className="h-4 w-4 text-yellow-300" /> : <LightbulbOff className="h-4 w-4 text-muted-foreground" />}
+        <span className="sr-only">Toggle Light</span>
       </Button>
     </div>
   );

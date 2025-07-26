@@ -70,7 +70,7 @@ const initialProjects: Project[] = [
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>(initialProjects);
   const [isPersonalizing, setIsPersonalizing] = useState(false);
-  const [isIlluminated, setIsIlluminated] = useState(false);
+  const [lightsOn, setLightsOn] = useState(false);
 
   const handlePersonalizeProjects = async (interests: string) => {
     if (!interests) return;
@@ -97,17 +97,17 @@ export default function Home() {
     }
   };
 
-  const toggleLight = () => {
-    setIsIlluminated(prev => !prev);
+  const toggleLights = () => {
+    setLightsOn(prev => !prev);
   }
 
   return (
     <main className="relative">
       <Nav />
-      <MusicPlayer onToggle={toggleLight} />
+      <MusicPlayer onToggleLight={toggleLights} lightsOn={lightsOn} />
       <HeroSection onPersonalize={handlePersonalizeProjects} isPersonalizing={isPersonalizing} />
 
-      {!isIlluminated && (
+      {!lightsOn && (
           <div className="text-center my-16 animate-fade-in px-4">
               <Lightbulb className="mx-auto h-8 w-8 text-yellow-300/50 mb-4" />
               <p className="text-muted-foreground max-w-md mx-auto">
@@ -119,8 +119,8 @@ export default function Home() {
       )}
 
       <div>
-        <ProjectsSection projects={projects} isIlluminated={isIlluminated} />
-        <SocialsSection isIlluminated={isIlluminated} />
+        <ProjectsSection projects={projects} isIlluminated={lightsOn} />
+        <SocialsSection isIlluminated={lightsOn} />
       </div>
 
       <footer className="text-center text-muted-foreground py-8 px-4">
