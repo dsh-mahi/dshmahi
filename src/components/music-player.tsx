@@ -14,7 +14,7 @@ export default function MusicPlayer({ onToggle }: MusicPlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   // A placeholder music track. Replace this with your desired audio file.
-  const musicSrc = "https://cdn.pixabay.com/audio/2022/08/04/audio_2dde6b6cf1.mp3";
+  const musicSrc = "/background-music.mp3";
 
   useEffect(() => {
     // Autoplay is often restricted by browsers. 
