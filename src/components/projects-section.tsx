@@ -8,8 +8,6 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useSpotlight } from '@/hooks/use-spotlight';
 import { cn } from '@/lib/utils';
-import { Button } from './ui/button';
-import { PlayCircle } from 'lucide-react';
 import { Dialog, DialogContent } from './ui/dialog';
 
 const ProjectCard = ({ project, index, isIlluminated, onPlayVideo }: { project: Project, index: number, isIlluminated: boolean, onPlayVideo: (url: string) => void }) => {
@@ -17,16 +15,11 @@ const ProjectCard = ({ project, index, isIlluminated, onPlayVideo }: { project: 
   const { spotlightStyle, maskStyle } = useSpotlight(cardRef);
   const isYoutubeVideo = project.projectUrl.includes('youtube.com');
 
-  const getYouTubeEmbedUrl = (url: string) => {
-    const videoId = url.split('v=')[1];
-    if (videoId) {
-      const ampersandPosition = videoId.indexOf('&');
-      if (ampersandPosition !== -1) {
-        return `https://www.youtube.com/embed/${videoId.substring(0, ampersandPosition)}`;
-      }
-      return `https://www.youtube.com/embed/${videoId}`;
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (isYoutubeVideo) {
+      e.preventDefault();
+      onPlayVideo(project.projectUrl);
     }
-    return '';
   };
 
   return (
@@ -54,7 +47,7 @@ const ProjectCard = ({ project, index, isIlluminated, onPlayVideo }: { project: 
             <div className="h-8 w-8 bg-muted rounded-full" />
             <div>
               <CardTitle className="text-xl">{project.title}</CardTitle>
-              <a href={project.projectUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:underline">
+              <a href={project.projectUrl} onClick={handleLinkClick} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:underline">
                 {project.siteUrl}
               </a>
             </div>
@@ -62,15 +55,6 @@ const ProjectCard = ({ project, index, isIlluminated, onPlayVideo }: { project: 
           <CardDescription className="mb-4 flex-grow">{project.description}</CardDescription>
           
           <div className="flex flex-wrap items-center gap-3 mt-auto pt-4">
-             {isYoutubeVideo ? (
-              <Button size="sm" variant="outline" onClick={() => onPlayVideo(project.projectUrl)}>
-                <PlayCircle className="mr-2 h-4 w-4" /> Watch Video
-              </Button>
-            ) : (
-               <Button size="sm" variant="outline" asChild>
-                <a href={project.projectUrl} target="_blank" rel="noopener noreferrer">View Project</a>
-              </Button>
-            )}
             <div className="flex flex-wrap gap-2">
               {project.techStack.map(tech => (
                 <Badge key={tech} variant="outline" className="capitalize">{tech}</Badge>
