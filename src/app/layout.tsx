@@ -3,6 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import ParticleBackground from '@/components/particle-background';
 import DateTime from '@/components/date-time';
+import MusicPlayer from '@/components/music-player';
 
 export const metadata: Metadata = {
   title: 'Dsh Mahi',
@@ -26,6 +27,7 @@ export default function RootLayout({
         <div className="relative z-10">
           {children}
         </div>
+        <MusicPlayer />
         <DateTime />
         <Toaster />
       </body>
