@@ -108,8 +108,17 @@ export default function ProjectsSection({ projects, isIlluminated }: { projects:
               style={!isIlluminated ? headerMask : {}}
             >
                 <p className="text-sm font-bold uppercase text-muted-foreground mb-2">Projects</p>
-                <h2 className="text-4xl md:text-5xl font-bold mb-4">Brands I've worked with</h2>
-                <p className="text-lg text-muted-foreground">Here I flex about what I've done so far. Applause optional, gasping encouraged. Feel free to rant!</p>
+                {activeTab === 'personal' ? (
+                  <>
+                    <h2 className="text-4xl md:text-5xl font-bold mb-4">Some of My Works</h2>
+                    <p className="text-lg text-muted-foreground">Here I flex about what I've done so far. Applause optional, gasping encouraged. Feel free to rant!</p>
+                  </>
+                ) : (
+                  <>
+                    <h2 className="text-4xl md:text-5xl font-bold mb-4">Brands I've Worked With</h2>
+                    <p className="text-lg text-muted-foreground">I've had the pleasure of collaborating with some amazing companies. Here's a glimpse of our work.</p>
+                  </>
+                )}
             </div>
             <div className="flex items-start justify-start md:justify-end">
                 <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full md:w-auto">
