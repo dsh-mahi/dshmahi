@@ -23,12 +23,15 @@ export default function MusicPlayer({ onToggle }: MusicPlayerProps) {
     if (playPromise !== undefined) {
       playPromise.then(() => {
         setIsPlaying(true);
+        if(onToggle) {
+          onToggle();
+        }
       }).catch(error => {
         console.log("Autoplay was prevented.", error);
         setIsPlaying(false);
       });
     }
-  }, []);
+  }, [onToggle]);
 
   const togglePlay = () => {
     if (isPlaying) {

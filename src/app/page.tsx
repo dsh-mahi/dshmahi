@@ -7,7 +7,6 @@ import HeroSection from '@/components/hero-section';
 import ProjectsSection from '@/components/projects-section';
 import SocialsSection from '@/components/socials-section';
 import Nav from '@/components/nav';
-import { cn } from '@/lib/utils';
 import MusicPlayer from '@/components/music-player';
 
 
@@ -61,9 +60,7 @@ export default function Home() {
   };
 
   const toggleLight = () => {
-    if (!isIlluminated) {
-      setIsIlluminated(true);
-    }
+    setIsIlluminated(prev => !prev);
   }
 
   return (
@@ -71,9 +68,9 @@ export default function Home() {
       <Nav />
       <MusicPlayer onToggle={toggleLight} />
       <HeroSection onPersonalize={handlePersonalizeProjects} isPersonalizing={isPersonalizing} />
-      <div className={cn("transition-opacity duration-1000 ease-in-out", isIlluminated ? "opacity-100" : "opacity-0")}>
-        <ProjectsSection projects={projects} />
-        <SocialsSection />
+      <div>
+        <ProjectsSection projects={projects} isIlluminated={isIlluminated} />
+        <SocialsSection isIlluminated={isIlluminated} />
       </div>
       <footer className="text-center text-muted-foreground py-8 px-4">
         <p>&copy; {new Date().getFullYear()} Dsh Mahi. All Rights Reserved.</p>

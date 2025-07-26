@@ -6,8 +6,9 @@ import type { Project } from '../app/page';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useSpotlight } from '@/hooks/use-spotlight';
+import { cn } from '@/lib/utils';
 
-const ProjectCard = ({ project, index }: { project: Project, index: number }) => {
+const ProjectCard = ({ project, index, isIlluminated }: { project: Project, index: number, isIlluminated: boolean }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const { spotlightStyle } = useSpotlight(cardRef);
 
@@ -22,7 +23,7 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
         className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={spotlightStyle}
       />
-      <div className="relative z-10">
+      <div className={cn("relative z-10 transition-all duration-1000", isIlluminated ? "opacity-100" : "invisible")}>
         <CardContent className="flex-grow p-6 pt-6">
           <div className="flex flex-wrap gap-2 mb-4">
             {project.tags.map(tag => (
@@ -51,7 +52,7 @@ const ProjectCard = ({ project, index }: { project: Project, index: number }) =>
 };
 
 
-export default function ProjectsSection({ projects }: { projects: Project[] }) {
+export default function ProjectsSection({ projects, isIlluminated }: { projects: Project[], isIlluminated: boolean }) {
   const clientProjects = projects.filter(p => p.category === 'Client');
   const personalProjects = projects.filter(p => p.category === 'Personal');
   const [activeTab, setActiveTab] = useState('personal');
@@ -59,7 +60,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
   return (
     <section id="projects" className="min-h-screen w-full py-24 px-4 sm:px-6 lg:px-8 bg-transparent flex flex-col items-center justify-center">
       <div className="max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div className={cn("grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 transition-opacity duration-1000", isIlluminated ? "opacity-100" : "opacity-0")}>
             <div className="md:col-span-2">
                 <p className="text-sm font-bold uppercase text-muted-foreground mb-2">Projects</p>
                 <h2 className="text-4xl md:text-5xl font-bold mb-4">Brands I've worked with</h2>
@@ -79,7 +80,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
           <TabsContent value="personal">
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {personalProjects.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} />
+                <ProjectCard key={project.id} project={project} index={index} isIlluminated={isIlluminated} />
               ))}
             </div>
             {personalProjects.length === 0 && (
@@ -91,7 +92,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
           <TabsContent value="client">
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {clientProjects.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} />
+                <ProjectCard key={project.id} project={project} index={index} isIlluminated={isIlluminated} />
               ))}
             </div>
              {clientProjects.length === 0 && (
