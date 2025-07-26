@@ -24,10 +24,10 @@ const ProjectCard = ({ project, index, isIlluminated }: { project: Project, inde
         style={spotlightStyle}
       />
       <div 
-        className="relative z-10 transition-all duration-300"
+        className="relative z-10 transition-all duration-300 h-full"
         style={!isIlluminated ? maskStyle : {}}
       >
-        <CardContent className="flex-grow p-6 pt-6">
+        <CardContent className="flex-grow p-6 pt-6 h-full flex flex-col">
           <div className="flex flex-wrap gap-2 mb-4">
             {project.tags.map(tag => (
               <Badge key={tag} variant={tag === 'Work In Progress' ? 'destructive' : 'secondary'} className="capitalize">{tag}</Badge>
@@ -42,7 +42,7 @@ const ProjectCard = ({ project, index, isIlluminated }: { project: Project, inde
               </a>
             </div>
           </div>
-          <CardDescription className="mb-4">{project.description}</CardDescription>
+          <CardDescription className="mb-4 flex-grow">{project.description}</CardDescription>
           <div className="flex flex-wrap gap-3">
             {project.techStack.map(tech => (
               <Badge key={tech} variant="outline" className="capitalize">{tech}</Badge>
@@ -60,11 +60,21 @@ export default function ProjectsSection({ projects, isIlluminated }: { projects:
   const personalProjects = projects.filter(p => p.category === 'Personal');
   const [activeTab, setActiveTab] = useState('personal');
 
+  const headerRef = useRef<HTMLDivElement>(null);
+  const { spotlightStyle: headerSpotlight, maskStyle: headerMask } = useSpotlight(headerRef);
+
   return (
     <section id="projects" className="min-h-screen w-full py-24 px-4 sm:px-6 lg:px-8 bg-transparent flex flex-col items-center justify-center">
       <div className="max-w-7xl mx-auto w-full">
-        <div className={cn("grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 transition-opacity duration-1000", isIlluminated ? "opacity-100" : "opacity-0")}>
-            <div className="md:col-span-2">
+        <div ref={headerRef} className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 relative">
+             <div 
+              className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300"
+              style={headerSpotlight}
+            />
+            <div 
+              className="md:col-span-2 transition-all duration-300"
+              style={!isIlluminated ? headerMask : {}}
+            >
                 <p className="text-sm font-bold uppercase text-muted-foreground mb-2">Projects</p>
                 <h2 className="text-4xl md:text-5xl font-bold mb-4">Brands I've worked with</h2>
                 <p className="text-lg text-muted-foreground">Here I flex about what I've done so far. Applause optional, gasping encouraged. Feel free to rant!</p>
