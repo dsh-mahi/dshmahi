@@ -45,11 +45,11 @@ export default function HeroSection({ onPersonalize, isPersonalizing }: HeroSect
     <section id="hero" className="h-screen w-full flex flex-col justify-center items-center text-center relative overflow-hidden">
       <div className="z-10 p-4">
         {greeting ? (
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in max-w-4xl mx-auto">{greeting.greeting}</h1>
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in max-w-4xl mx-auto font-display">{greeting.greeting}</h1>
         ) : (
           <div className="animate-fade-in">
-            <h1 className="text-4xl md:text-6xl font-bold mb-2">Dsh Mahi</h1>
-            <p className="text-lg md:text-2xl text-muted-foreground mb-8">Creative Developer & Designer</p>
+            <h1 className="text-4xl md:text-6xl font-bold mb-2 font-display">Dsh Mahi</h1>
+            <p className="text-lg md:text-2xl text-muted-foreground mb-8">still exploring what i am good at</p>
           </div>
         )}
         <Button onClick={() => setDialogOpen(true)} size="lg" className="rounded-full mt-4">
