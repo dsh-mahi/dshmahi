@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 
 const ProjectCard = ({ project, index, isIlluminated }: { project: Project, index: number, isIlluminated: boolean }) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  const { spotlightStyle } = useSpotlight(cardRef);
+  const { spotlightStyle, maskStyle } = useSpotlight(cardRef);
 
   return (
     <Card 
@@ -23,7 +23,10 @@ const ProjectCard = ({ project, index, isIlluminated }: { project: Project, inde
         className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={spotlightStyle}
       />
-      <div className={cn("relative z-10 transition-all duration-1000", isIlluminated ? "opacity-100" : "invisible")}>
+      <div 
+        className="relative z-10 transition-all duration-300"
+        style={!isIlluminated ? maskStyle : {}}
+      >
         <CardContent className="flex-grow p-6 pt-6">
           <div className="flex flex-wrap gap-2 mb-4">
             {project.tags.map(tag => (

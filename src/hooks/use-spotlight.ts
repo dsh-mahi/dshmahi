@@ -35,5 +35,10 @@ export function useSpotlight(ref: React.RefObject<HTMLElement>) {
      background: `radial-gradient(circle at ${position.x}px ${position.y}px, hsl(var(--accent) / 0.8), transparent 40%)`,
   }
 
-  return { spotlightStyle };
+  const maskStyle: React.CSSProperties = {
+    maskImage: `radial-gradient(circle at ${position.x}px ${position.y}px, black 20%, transparent 40%)`,
+    WebkitMaskImage: `radial-gradient(circle at ${position.x}px ${position.y}px, black 20%, transparent 40%)`,
+  };
+
+  return { spotlightStyle, maskStyle };
 }

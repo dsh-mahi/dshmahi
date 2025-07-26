@@ -45,7 +45,7 @@ const socialLinks = [
 
 const SocialCard = ({ link, index, isIlluminated }: { link: (typeof socialLinks)[0], index: number, isIlluminated: boolean }) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  const { spotlightStyle } = useSpotlight(cardRef);
+  const { spotlightStyle, maskStyle } = useSpotlight(cardRef);
   const Icon = link.icon;
   
   return (
@@ -55,7 +55,10 @@ const SocialCard = ({ link, index, isIlluminated }: { link: (typeof socialLinks)
           className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={spotlightStyle}
         />
-        <div className={cn("relative z-10 transition-all duration-1000", isIlluminated ? "opacity-100" : "invisible")}>
+        <div 
+          className="relative z-10 transition-all duration-300"
+          style={!isIlluminated ? maskStyle : {}}
+        >
           <CardContent className="flex flex-col items-center justify-center gap-2 p-0">
             <div className={cn('h-10 w-10 rounded-full flex items-center justify-center mb-2 border transition-colors', link.isPersistent ? link.borderColor : `border-muted-foreground ${link.borderColor}`)}>
               <Icon className={cn('h-4 w-4 transition-colors', link.isPersistent ? link.color : `text-muted-foreground ${link.color}`)} />
