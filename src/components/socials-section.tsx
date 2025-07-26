@@ -49,26 +49,26 @@ const SocialCard = ({ link, index, isIlluminated }: { link: (typeof socialLinks)
   const Icon = link.icon;
   
   return (
-      <Card ref={cardRef} className="group bg-card/30 backdrop-blur-lg hover:border-muted-foreground/50 transition-all duration-300 h-48 flex flex-col items-center justify-center text-center p-6 rounded-2xl shadow-lg hover:shadow-primary/10 relative border border-white/10">
+    <Card ref={cardRef} className="group bg-card/30 backdrop-blur-lg hover:border-muted-foreground/50 transition-all duration-300 h-48 flex flex-col items-center justify-center text-center p-6 rounded-2xl shadow-lg hover:shadow-primary/10 relative border border-white/10">
+      <div 
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={spotlightStyle}
+      />
+      <a href={link.href} key={index} target="_blank" rel="noopener noreferrer" className="w-full h-full">
         <div 
-          className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-          style={spotlightStyle}
-        />
-        <div 
-          className="relative z-10 transition-all duration-300 h-full w-full"
+          className="relative z-10 transition-all duration-300 h-full w-full flex flex-col items-center justify-center"
           style={!isIlluminated ? maskStyle : {}}
         >
-          <a href={link.href} key={index} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center h-full">
-            <CardContent className="flex flex-col items-center justify-center gap-2 p-0">
-              <div className={cn('h-10 w-10 rounded-full flex items-center justify-center mb-2 border transition-colors', link.isPersistent ? link.borderColor : `border-muted-foreground ${link.borderColor}`)}>
-                <Icon className={cn('h-4 w-4 transition-colors', link.isPersistent ? link.color : `text-muted-foreground ${link.color}`)} />
-              </div>
-              <p className={cn('text-sm font-semibold transition-colors', link.isPersistent ? link.color : `text-foreground ${link.color}`)}>{link.name}</p>
-              <p className="text-xs text-muted-foreground">{link.handle}</p>
-            </CardContent>
-          </a>
+          <CardContent className="flex flex-col items-center justify-center gap-2 p-0">
+            <div className={cn('h-10 w-10 rounded-full flex items-center justify-center mb-2 border transition-colors', link.isPersistent ? link.borderColor : `border-muted-foreground ${link.borderColor}`)}>
+              <Icon className={cn('h-4 w-4 transition-colors', link.isPersistent ? link.color : `text-muted-foreground ${link.color}`)} />
+            </div>
+            <p className={cn('text-sm font-semibold transition-colors', link.isPersistent ? link.color : `text-foreground ${link.color}`)}>{link.name}</p>
+            <p className="text-xs text-muted-foreground">{link.handle}</p>
+          </CardContent>
         </div>
-      </Card>
+      </a>
+    </Card>
   )
 }
 
@@ -85,7 +85,7 @@ export default function SocialsSection({ isIlluminated }: { isIlluminated: boole
             style={headerSpotlight}
           />
           <div 
-            className="relative z-10 transition-all duration-300"
+            className="relative z-10 transition-all duration-300 p-4"
             style={!isIlluminated ? headerMask : {}}
           >
             <p className="text-sm font-bold uppercase text-muted-foreground mb-2">Connect</p>

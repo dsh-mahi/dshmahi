@@ -8,6 +8,8 @@ import ProjectsSection from '@/components/projects-section';
 import SocialsSection from '@/components/socials-section';
 import Nav from '@/components/nav';
 import MusicPlayer from '@/components/music-player';
+import { cn } from '@/lib/utils';
+import { Lightbulb } from 'lucide-react';
 
 
 export interface Project {
@@ -68,10 +70,23 @@ export default function Home() {
       <Nav />
       <MusicPlayer onToggle={toggleLight} />
       <HeroSection onPersonalize={handlePersonalizeProjects} isPersonalizing={isPersonalizing} />
+
+      {!isIlluminated && (
+          <div className="text-center my-16 animate-fade-in px-4">
+              <Lightbulb className="mx-auto h-8 w-8 text-yellow-300/50 mb-4" />
+              <p className="text-muted-foreground max-w-md mx-auto">
+                  It's a bit dark in here... Can you find the light switch?
+                  <br/>
+                  <span className="text-xs">Maybe the melody holds the key.</span>
+              </p>
+          </div>
+      )}
+
       <div>
         <ProjectsSection projects={projects} isIlluminated={isIlluminated} />
         <SocialsSection isIlluminated={isIlluminated} />
       </div>
+
       <footer className="text-center text-muted-foreground py-8 px-4">
         <p>&copy; {new Date().getFullYear()} Dsh Mahi. All Rights Reserved.</p>
         <p className="text-xs mt-2">Crafted by human and ai minds.</p>
