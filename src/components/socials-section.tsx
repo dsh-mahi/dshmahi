@@ -11,7 +11,7 @@ const socialLinks = [
   {
     name: 'WhatsApp',
     handle: 'For a quick chat',
-    href: '#',
+    href: 'https://wa.me/01319507106',
     icon: Phone,
     color: 'text-[#25D366]',
     borderColor: 'border-[#25D366]',
@@ -20,7 +20,7 @@ const socialLinks = [
   {
     name: 'Instagram',
     handle: 'The highlight reel',
-    href: '#',
+    href: 'https://www.instagram.com/dewan_sahariar_hossain_mahi_/',
     icon: Instagram,
     color: 'group-hover:text-[#E4405F]',
     borderColor: 'group-hover:border-[#E4405F]',
@@ -28,7 +28,7 @@ const socialLinks = [
   {
     name: 'LinkedIn',
     handle: 'The professional side',
-    href: '#',
+    href: 'https://www.linkedin.com/in/dsh-mahi/',
     icon: Linkedin,
     color: 'group-hover:text-[#0A66C2]',
     borderColor: 'group-hover:border-[#0A66C2]',
@@ -36,7 +36,7 @@ const socialLinks = [
   {
     name: 'GitHub',
     handle: 'Where the code lives',
-    href: '#',
+    href: 'https://github.com/dsh-mahi',
     icon: Github,
     color: 'group-hover:text-white',
     borderColor: 'group-hover:border-white',
