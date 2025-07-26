@@ -7,6 +7,9 @@ import HeroSection from '@/components/hero-section';
 import ProjectsSection from '@/components/projects-section';
 import SocialsSection from '@/components/socials-section';
 import Nav from '@/components/nav';
+import { cn } from '@/lib/utils';
+import MusicPlayer from '@/components/music-player';
+
 
 export interface Project {
   id: number;
@@ -30,6 +33,7 @@ const initialProjects: Project[] = [
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>(initialProjects);
   const [isPersonalizing, setIsPersonalizing] = useState(false);
+  const [isIlluminated, setIsIlluminated] = useState(false);
 
   const handlePersonalizeProjects = async (interests: string) => {
     if (!interests) return;
@@ -56,12 +60,21 @@ export default function Home() {
     }
   };
 
+  const toggleLight = () => {
+    if (!isIlluminated) {
+      setIsIlluminated(true);
+    }
+  }
+
   return (
     <main className="relative">
       <Nav />
+      <MusicPlayer onToggle={toggleLight} />
       <HeroSection onPersonalize={handlePersonalizeProjects} isPersonalizing={isPersonalizing} />
-      <ProjectsSection projects={projects} />
-      <SocialsSection />
+      <div className={cn("transition-opacity duration-1000 ease-in-out", isIlluminated ? "opacity-100" : "opacity-0")}>
+        <ProjectsSection projects={projects} />
+        <SocialsSection />
+      </div>
       <footer className="text-center text-muted-foreground py-8 px-4">
         <p>&copy; {new Date().getFullYear()} Dsh Mahi. All Rights Reserved.</p>
         <p className="text-xs mt-2">Crafted by human and ai minds.</p>

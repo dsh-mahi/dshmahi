@@ -5,7 +5,11 @@ import { useState, useRef, useEffect } from 'react';
 import { Music, VolumeX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-export default function MusicPlayer() {
+interface MusicPlayerProps {
+  onToggle?: () => void;
+}
+
+export default function MusicPlayer({ onToggle }: MusicPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -33,6 +37,9 @@ export default function MusicPlayer() {
       audioRef.current?.play();
     }
     setIsPlaying(!isPlaying);
+    if(onToggle) {
+        onToggle();
+    }
   };
 
   return (
