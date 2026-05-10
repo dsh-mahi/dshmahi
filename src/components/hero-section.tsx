@@ -111,9 +111,9 @@ export default function HeroSection({
       id="hero"
       className="h-screen w-full flex flex-col justify-center items-center text-center relative overflow-hidden"
     >
-      <div className="z-10 p-4">
+      <div className="z-10 w-full max-w-3xl mx-auto px-4 sm:px-6">
         {greeting ? (
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in max-w-4xl mx-auto">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold md:font-bold mb-4 animate-fade-in leading-snug px-1">
             {greeting.greeting}
           </h1>
         ) : (
@@ -124,20 +124,21 @@ export default function HeroSection({
             </p>
           </div>
         )}
-        <div className="mt-4 flex items-center justify-center gap-2">
+        <div className="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2 sm:gap-3 max-w-md sm:max-w-none mx-auto">
           <Button
             onClick={() => setDialogOpen(true)}
             size="lg"
-            className="rounded-full"
+            className="rounded-full w-full sm:w-auto shrink-0 text-sm sm:text-base px-4 sm:px-8 whitespace-normal h-auto min-h-11 py-2.5"
           >
-            Personalize Experience ✨
+            <span className="sm:hidden">Personalize ✨</span>
+            <span className="hidden sm:inline">Personalize Experience ✨</span>
           </Button>
           {hasPersonalization && (
             <Button
               type="button"
               variant="outline"
               size="lg"
-              className="rounded-full"
+              className="rounded-full w-full sm:w-auto shrink-0 text-sm sm:text-base px-4 sm:px-8 whitespace-normal h-auto min-h-11 py-2.5"
               onClick={handleClear}
             >
               Clear personalization
@@ -153,7 +154,7 @@ export default function HeroSection({
         <ArrowDown className="h-8 w-8 text-muted-foreground hover:text-foreground transition-colors" />
       </a>
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-[425px] w-[calc(100vw-2rem)]">
           <DialogHeader>
             <DialogTitle>Personalize Your Visit</DialogTitle>
             <DialogDescription>

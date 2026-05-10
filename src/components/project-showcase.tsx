@@ -1,24 +1,30 @@
-'use client';
+"use client";
 
-import { useMemo } from 'react';
-import Image from 'next/image';
-import { ExternalLink } from 'lucide-react';
-import type { Project } from '@/lib/projects';
+import { useMemo } from "react";
+import Image from "next/image";
+import { ExternalLink } from "lucide-react";
+import type { Project } from "@/lib/projects";
 
 function formatAssetCaption(assetPath: string) {
-  const fileName = assetPath.split('/').pop() ?? '';
-  const withoutExtension = fileName.replace(/\.[^/.]+$/, '');
-  return withoutExtension
-    .replace(/[_-]+/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+  const fileName = assetPath.split("/").pop() ?? "";
+  const withoutExtension = fileName.replace(/\.[^/.]+$/, "");
+  return withoutExtension.replace(/[_-]+/g, " ").replace(/\s+/g, " ").trim();
+}
+
+/** Encode each path segment so spaces and special chars work everywhere (iframe + new tab). */
+function encodePublicAssetPath(assetPath: string) {
+  const trimmed = assetPath.startsWith("/") ? assetPath.slice(1) : assetPath;
+  if (!trimmed) return "/";
+  return `/${trimmed.split("/").map((s) => encodeURIComponent(s)).join("/")}`;
 }
 
 function getYouTubeEmbedUrl(url: string) {
   try {
     const urlObj = new URL(url);
-    const isShortLink = urlObj.hostname.includes('youtu.be');
-    const videoId = isShortLink ? urlObj.pathname.replace('/', '') : urlObj.searchParams.get('v');
+    const isShortLink = urlObj.hostname.includes("youtu.be");
+    const videoId = isShortLink
+      ? urlObj.pathname.replace("/", "")
+      : urlObj.searchParams.get("v");
     return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
   } catch {
     return null;
@@ -36,7 +42,11 @@ export default function ProjectShowcase({
 
   const embedUrl = useMemo(() => {
     if (!project.externalUrl) return null;
-    if (!project.externalUrl.includes('youtube.com') && !project.externalUrl.includes('youtu.be')) return null;
+    if (
+      !project.externalUrl.includes("youtube.com") &&
+      !project.externalUrl.includes("youtu.be")
+    )
+      return null;
     return getYouTubeEmbedUrl(project.externalUrl);
   }, [project.externalUrl]);
 
@@ -44,7 +54,11 @@ export default function ProjectShowcase({
     return (
       <div className="space-y-4">
         <div className="flex items-center justify-between gap-3">
-          {showHeader ? <h2 className="text-2xl font-semibold">{project.title}</h2> : <div />}
+          {showHeader ? (
+            <h2 className="text-2xl font-semibold">{project.title}</h2>
+          ) : (
+            <div />
+          )}
           {project.externalUrl && (
             <a
               href={project.externalUrl}
@@ -72,42 +86,69 @@ export default function ProjectShowcase({
     );
   }
 
-  if (project.modalKind === 'pdf') {
-    const pdfAsset = assets[0] ?? '';
+  if (project.modalKind === "pdf") {
+    const pdfAsset = assets[0] ?? "";
+    const pdfSrc = encodePublicAssetPath(pdfAsset);
     return (
       <div className="space-y-4">
-        <div className="flex items-center justify-between gap-3">
-          {showHeader ? <h2 className="text-2xl font-semibold">{project.title}</h2> : <div />}
-          {project.externalUrl && (
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+          {showHeader ? (
+            <h2 className="text-2xl font-semibold">{project.title}</h2>
+          ) : (
+            <div />
+          )}
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <a
-              href={project.externalUrl}
+              href={pdfSrc}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
             >
               <ExternalLink className="h-4 w-4" />
-              Open link
+              Open PDF
             </a>
-          )}
+            {project.externalUrl && (
+              <a
+                href={project.externalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+              >
+                <ExternalLink className="h-4 w-4" />
+                Open link
+              </a>
+            )}
+          </div>
         </div>
-        <iframe
-          src={encodeURI(pdfAsset)}
+        <object
+          data={`${pdfSrc}#view=FitH`}
+          type="application/pdf"
           title={`${project.title} PDF`}
-          className="w-full h-[62vh] sm:h-[75vh] rounded-xl bg-white"
-        />
-        <p className="text-sm text-muted-foreground">{formatAssetCaption(pdfAsset)}</p>
+          className="w-full h-[62vh] sm:h-[75vh] rounded-xl bg-white border border-white/10"
+        >
+          <iframe
+            src={`${pdfSrc}#view=FitH`}
+            title={`${project.title} PDF`}
+            className="w-full h-[62vh] sm:h-[75vh] rounded-xl bg-white"
+          />
+        </object>
+        <p className="text-sm text-muted-foreground">
+          {formatAssetCaption(pdfAsset)}
+        </p>
       </div>
     );
   }
 
-  if (project.modalKind === 'gallery') {
+  if (project.modalKind === "gallery") {
     return (
       <div className="space-y-4">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           {showHeader ? (
             <div className="space-y-1">
               <h2 className="text-2xl font-semibold">{project.title}</h2>
-              <p className="text-sm text-muted-foreground">{project.description}</p>
+              <p className="text-sm text-muted-foreground">
+                {project.description}
+              </p>
             </div>
           ) : (
             <div />
@@ -129,8 +170,8 @@ export default function ProjectShowcase({
 
         <div className="space-y-8">
           {assets.map((asset) => {
-            const normalizedAsset = encodeURI(asset);
-            const isPdf = normalizedAsset.toLowerCase().endsWith('.pdf');
+            const normalizedAsset = encodePublicAssetPath(asset);
+            const isPdf = asset.toLowerCase().endsWith(".pdf");
             return (
               <div key={asset} className="space-y-2">
                 {isPdf ? (
@@ -149,7 +190,9 @@ export default function ProjectShowcase({
                     className="w-full h-[52vh] sm:h-[70vh] object-contain rounded-xl bg-black"
                   />
                 )}
-                <p className="text-sm text-muted-foreground">{formatAssetCaption(asset)}</p>
+                <p className="text-sm text-muted-foreground">
+                  {formatAssetCaption(asset)}
+                </p>
               </div>
             );
           })}
@@ -180,4 +223,3 @@ export default function ProjectShowcase({
     </div>
   );
 }
-

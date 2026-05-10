@@ -2,25 +2,22 @@
 
 import { useEffect, useState } from "react";
 import MusicPlayer from "@/components/music-player";
+import { persistLightsOn, readPersistedLightsOn } from "@/lib/light-state";
 
 export default function GlobalLightToggle() {
   const [lightsOn, setLightsOn] = useState(false);
 
   useEffect(() => {
-    const savedLightsState = window.localStorage.getItem("dshmahi-lights-on");
-    if (savedLightsState === "true") {
-      setLightsOn(true);
-    }
+    setLightsOn(readPersistedLightsOn());
   }, []);
 
   const handleToggleLight = () => {
     setLightsOn((prev) => {
       const next = !prev;
-      window.localStorage.setItem("dshmahi-lights-on", String(next));
+      persistLightsOn(next);
       return next;
     });
   };
 
   return <MusicPlayer onToggleLight={handleToggleLight} lightsOn={lightsOn} />;
 }
-

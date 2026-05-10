@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import HeroSection from "@/components/hero-section";
 import ProjectsSection from "@/components/projects-section";
 import SocialsSection from "@/components/socials-section";
@@ -13,14 +13,18 @@ import {
   getPersonalizationMemory,
   setPersonalizationMemory,
 } from "@/lib/personalization-memory";
+import { persistLightsOn, readPersistedLightsOn } from "@/lib/light-state";
 
 export default function HomeClient() {
   const [projects, setProjects] = useState<Project[]>(initialProjects);
   const [isPersonalizing, setIsPersonalizing] = useState(false);
   const [hasPersonalization, setHasPersonalization] = useState(false);
   const [lightsOn, setLightsOn] = useState(false);
-  const [initialSelectedInterests, setInitialSelectedInterests] = useState<string[]>([]);
+  const [initialSelectedInterests, setInitialSelectedInterests] = useState<
+    string[]
+  >([]);
   const [initialGreeting, setInitialGreeting] = useState<string | null>(null);
+  const skipInitialLightsPersist = useRef(true);
 
   const computePersonalizedProjects = (interests: string) => {
     const keywords = interests
@@ -67,14 +71,15 @@ export default function HomeClient() {
   };
 
   useEffect(() => {
-    const savedLightsState = window.localStorage.getItem("dshmahi-lights-on");
-    if (savedLightsState === "true") {
-      setLightsOn(true);
-    }
+    setLightsOn(readPersistedLightsOn());
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem("dshmahi-lights-on", String(lightsOn));
+    if (skipInitialLightsPersist.current) {
+      skipInitialLightsPersist.current = false;
+      return;
+    }
+    persistLightsOn(lightsOn);
   }, [lightsOn]);
 
   useEffect(() => {
